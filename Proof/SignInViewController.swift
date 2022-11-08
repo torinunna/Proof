@@ -67,14 +67,18 @@ class SignInViewController: UIViewController {
         super.viewDidLoad()
         
         setUpLayout()
-        signUpBtn.addTarget(self, action: #selector(signUpButton), for: .touchUpInside)
+        signUpButton()
     }
     
 }
 
 private extension SignInViewController {
     
-    @objc func signUpButton() {
+    func signUpButton() {
+        signUpBtn.addTarget(self, action: #selector(signUpPressed), for: .touchUpInside)
+    }
+ 
+    @objc func signUpPressed() {
         let vc = SignUpViewController()
         vc.modalPresentationStyle = .automatic
         self.present(vc, animated: true, completion: nil)
