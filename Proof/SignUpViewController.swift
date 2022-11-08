@@ -41,17 +41,6 @@ class SignUpViewController: UIViewController {
         return textField
     }()
     
-    var confirmPwTextField: UITextField = {
-        let textField = UITextField()
-        textField.layer.borderWidth = 0.5
-        textField.layer.borderColor = UIColor.blue.cgColor
-        textField.placeholder = "비밀번호를 다시 한번 입력해 주세요."
-        textField.textColor = .label
-        textField.font = .systemFont(ofSize: 15.0)
-        
-        return textField
-    }()
-    
     let signUpBtn: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("가입하기", for: .normal)
@@ -75,7 +64,7 @@ private extension SignUpViewController {
     
     func setUpLayout() {
         
-        [titleLabel, idTextField, pwTextField, confirmPwTextField, signUpBtn].forEach { view.addSubview($0) }
+        [titleLabel, idTextField, pwTextField, signUpBtn].forEach { view.addSubview($0) }
         
         view.backgroundColor = .white
         
@@ -100,17 +89,10 @@ private extension SignUpViewController {
             $0.trailing.equalTo(idTextField.snp.trailing)
             $0.height.equalTo(30.0)
         }
-        
-        confirmPwTextField.snp.makeConstraints {
-            $0.leading.equalTo(idTextField.snp.leading)
-            $0.top.equalTo(pwTextField.snp.bottom).offset(viewInset)
-            $0.trailing.equalTo(idTextField.snp.trailing)
-            $0.height.equalTo(30.0)
-        }
-        
+
         signUpBtn.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(40.0)
-            $0.top.equalTo(confirmPwTextField.snp.bottom).offset(50.0)
+            $0.top.equalTo(pwTextField.snp.bottom).offset(50.0)
             $0.trailing.equalToSuperview().inset(40.0)
             $0.height.equalTo(40.0)
         }
