@@ -20,6 +20,7 @@
 		86123C642918FEF70004748F /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 86123C632918FEF70004748F /* FirebaseAuth */; };
 		86123C662918FEF70004748F /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 86123C652918FEF70004748F /* FirebaseFirestore */; };
 		86123C6A291941E90004748F /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86123C69291941E90004748F /* SignInViewController.swift */; };
+		86C4C809291A33A9009A0621 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C4C808291A33A9009A0621 /* SignUpViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 		86123C592918F2010004748F /* RetroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetroViewController.swift; sourceTree = "<group>"; };
 		86123C602918FD1F0004748F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		86123C69291941E90004748F /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		86C4C808291A33A9009A0621 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +76,7 @@
 				86123C402918E44F0004748F /* SceneDelegate.swift */,
 				86123C422918E44F0004748F /* TabBarController.swift */,
 				86123C69291941E90004748F /* SignInViewController.swift */,
+				86C4C808291A33A9009A0621 /* SignUpViewController.swift */,
 				86123C5B2918F50E0004748F /* Retro */,
 				86123C5C2918F5130004748F /* Calendar */,
 				86123C5D2918F5180004748F /* Setting */,
@@ -191,6 +194,7 @@
 			files = (
 				86123C582918F1F60004748F /* CalendarViewController.swift in Sources */,
 				86123C6A291941E90004748F /* SignInViewController.swift in Sources */,
+				86C4C809291A33A9009A0621 /* SignUpViewController.swift in Sources */,
 				86123C432918E44F0004748F /* TabBarController.swift in Sources */,
 				86123C3F2918E44F0004748F /* AppDelegate.swift in Sources */,
 				86123C5A2918F2010004748F /* RetroViewController.swift in Sources */,
