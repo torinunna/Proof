@@ -5,6 +5,7 @@
 //  Created by YUJIN KWON on 2022/11/08.
 //
 
+import Firebase
 import SnapKit
 import UIKit
 
@@ -56,11 +57,35 @@ class SignUpViewController: UIViewController {
         super.viewDidLoad()
         
         setUpLayout()
+        signUpButton()
     }
 
 }
 
 private extension SignUpViewController {
+    
+    func signUpButton() {
+        signUpBtn.addTarget(self, action: #selector(signUpPressed), for: .touchUpInside)
+    }
+ 
+    @objc func signUpPressed() {
+        if let email = idTextField.text, let password = pwTextField.text {
+            Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
+                if let e = error {
+                    print(e)
+                } else {
+                    self.alert()
+                }
+            }
+        }
+    }
+    
+    func alert() {
+        let alert = UIAlertController(title: nil, message: "회원가입 성공!", preferredStyle: .alert)
+        let alertAction = UIAlertAction(title: "확인", style: .cancel)
+        alert.addAction(alertAction)
+        present(alert, animated: true)
+    }
     
     func setUpLayout() {
         
