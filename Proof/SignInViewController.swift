@@ -74,6 +74,8 @@ class SignInViewController: UIViewController {
     
 }
 
+//MARK:  - Extension
+
 private extension SignInViewController {
     
     func signInButton() {
@@ -105,6 +107,8 @@ private extension SignInViewController {
         vc.modalPresentationStyle = .automatic
         self.present(vc, animated: true, completion: nil)
     }
+    
+    //MARK:  - Layout
     
     func setUpLayout() {
         

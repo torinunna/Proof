@@ -62,6 +62,8 @@ class SignUpViewController: UIViewController {
 
 }
 
+//MARK:  - Extension
+
 private extension SignUpViewController {
     
     func signUpButton() {
@@ -86,6 +88,8 @@ private extension SignUpViewController {
         alert.addAction(alertAction)
         present(alert, animated: true)
     }
+    
+    //MARK:  - Layout
     
     func setUpLayout() {
         
