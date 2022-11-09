@@ -5,6 +5,7 @@
 //  Created by YUJIN KWON on 2022/11/07.
 //
 
+import Firebase
 import SnapKit
 import UIKit
 
@@ -68,12 +69,33 @@ class SignInViewController: UIViewController {
         
         setUpLayout()
         signUpButton()
+        signInButton()
     }
     
 }
 
 private extension SignInViewController {
     
+    func signInButton() {
+        signInBtn.addTarget(self, action: #selector(signInPressed), for: .touchUpInside)
+    }
+    
+    @objc func signInPressed() {
+        
+        if let email = idTextField.text, let password = pwTextField.text {
+            Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
+                if let e = error {
+                    print(e)
+                } else {
+                    let vc = TabBarController()
+                    vc.modalPresentationStyle = .fullScreen
+                    self.present(vc, animated: true, completion: nil)
+                }
+            }
+        }
+        
+    }
+
     func signUpButton() {
         signUpBtn.addTarget(self, action: #selector(signUpPressed), for: .touchUpInside)
     }
