@@ -19,8 +19,13 @@ class AddRetroViewController: UIViewController {
 }
 
 private extension AddRetroViewController {
+    
     func setUpNavigationBar() {
-        navigationItem.title = "\(Date())"
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy년 MM월 dd일(E)"
+        let today = dateFormatter.string(from: Date())
+        navigationItem.title = "\(today)"
         
         let cancelButton = UIBarButtonItem(image: UIImage(systemName: "arrow.backward"), style: .plain, target: self, action: #selector(cancelButtonPressed))
         navigationItem.leftBarButtonItem = cancelButton
