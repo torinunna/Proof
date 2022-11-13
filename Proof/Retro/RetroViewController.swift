@@ -29,6 +29,8 @@ class RetroViewController: UIViewController {
 
 }
 
+//MARK:  - Extensions
+
 extension RetroViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 5
@@ -48,8 +50,15 @@ private extension RetroViewController {
     func setUpNavigationBar() {
         navigationItem.title = "나의 회고"
         
-        let addButton = UIBarButtonItem(image: UIImage(systemName: "plus.circle"), style: .plain, target: self, action: nil)
+        let addButton = UIBarButtonItem(image: UIImage(systemName: "plus.circle"), style: .plain, target: self, action: #selector(addButtonPressed))
         navigationItem.rightBarButtonItem = addButton
+    }
+    
+    @objc func addButtonPressed() {
+        let vc = AddRetroViewController()
+        let navVc = UINavigationController(rootViewController: vc)
+        navVc.modalPresentationStyle = .fullScreen
+        self.present(navVc, animated: true)
     }
     
     func setUpTableView() {
