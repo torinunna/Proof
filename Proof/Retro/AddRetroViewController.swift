@@ -9,7 +9,19 @@ import SnapKit
 import UIKit
 
 class AddRetroViewController: UIViewController {
-   
+    
+    private lazy var scrollView: UIScrollView = {
+        let view = UIScrollView()
+        view.backgroundColor = .systemBackground
+       return view
+    }()
+    
+    private lazy var contentView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .systemBackground
+        return view
+    }()
+    
     private lazy var dailyButton: UIButton = {
         let button = UIButton()
         button.setTitle("Daily", for: .normal)
@@ -41,25 +53,13 @@ class AddRetroViewController: UIViewController {
     }()
     
     private lazy var quarterlyButton: UIButton = {
-            let button = UIButton()
-            button.setTitle("Quarterly", for: .normal)
-            button.setTitleColor(.white, for: .normal)
-            button.titleLabel?.font = .systemFont(ofSize: 20.0, weight: .medium)
-            button.backgroundColor = .systemBlue
-            button.layer.cornerRadius = 3.0
-            return button
-    }()
-
-    private let scrollView: UIScrollView = {
-        let view = UIScrollView()
-        view.backgroundColor = .systemBackground
-        return view
-    }()
-    
-    private let contentView: UIView = {
-        let view =  UIView()
-        view.backgroundColor = .systemBackground
-        return view
+        let button = UIButton()
+        button.setTitle("Daily", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 20.0, weight: .medium)
+        button.backgroundColor = .systemBlue
+        button.layer.cornerRadius = 3.0
+        return button
     }()
     
     private lazy var liked: UILabel = {
@@ -141,7 +141,6 @@ class AddRetroViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .systemBackground
         setUpNavigationBar()
         setUpLayout()
     }
@@ -150,6 +149,7 @@ class AddRetroViewController: UIViewController {
 //MARK:  - Extensions
 
 extension AddRetroViewController: UITextViewDelegate {
+    
     func textViewDidBeginEditing(_ textView: UITextView) {
         guard textView.textColor == .secondaryLabel else { return }
         textView.text = nil
@@ -160,7 +160,6 @@ extension AddRetroViewController: UITextViewDelegate {
 private extension AddRetroViewController {
     
     func setUpNavigationBar() {
-        
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy년 MM월 dd일(E)"
         let today = dateFormatter.string(from: Date())
@@ -171,11 +170,11 @@ private extension AddRetroViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(saveButtonPressed))
     }
     
-    @objc func saveButtonPressed() {
+    @objc func cancelButtonPressed() {
         dismiss(animated: true)
     }
     
-    @objc func cancelButtonPressed() {
+    @objc func saveButtonPressed() {
         dismiss(animated: true)
     }
     
@@ -183,8 +182,8 @@ private extension AddRetroViewController {
     //MARK:  - Layout
     
     func setUpLayout() {
-        
         view.addSubview(scrollView)
+        scrollView.addSubview(contentView)
         
         scrollView.snp.makeConstraints {
             $0.leading.equalToSuperview()
@@ -192,81 +191,77 @@ private extension AddRetroViewController {
             $0.trailing.equalToSuperview()
             $0.bottom.equalToSuperview()
         }
-        
-        scrollView.addSubview(contentView)
-        
+
         contentView.snp.makeConstraints {
             $0.width.equalTo(scrollView.snp.width)
             $0.edges.equalTo(scrollView.contentLayoutGuide)
             $0.height.greaterThanOrEqualTo(view.snp.height).priority(.low)
         }
         
-        let stackView = UIStackView(arrangedSubviews: [dailyButton, weeklyButton, monthlyButton, quarterlyButton])
-        stackView.axis = .horizontal
-        stackView.alignment = .center
-        stackView.spacing = 2.0
-        stackView.distribution = .fillEqually
+        let buttonStackView = UIStackView(arrangedSubviews: [dailyButton, weeklyButton, monthlyButton, quarterlyButton])
+        buttonStackView.spacing = 3.0
+        buttonStackView.distribution = .fillEqually
         
-        [stackView, liked, likedTextView, learned, learnedTextView, lacked, lackedTextView, longedFor, longedForTextView].forEach { contentView.addSubview($0) }
-        
+        [buttonStackView, liked, likedTextView, learned, learnedTextView, lacked, lackedTextView, longedFor, longedForTextView].forEach { contentView.addSubview($0) }
+    
         let inset: CGFloat = 15.0
         
-        stackView.snp.makeConstraints {
+        buttonStackView.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(10.0)
             $0.top.equalToSuperview().inset(10.0)
             $0.trailing.equalToSuperview().inset(10.0)
             $0.height.equalTo(40.0)
         }
-        
+
         liked.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(inset)
-            $0.top.equalTo(stackView.snp.bottom).offset(inset)
+            $0.top.equalTo(buttonStackView.snp.bottom).offset(inset)
             $0.trailing.equalToSuperview().inset(inset)
             $0.height.equalTo(30.0)
         }
-        
+
         likedTextView.snp.makeConstraints {
             $0.leading.equalTo(liked.snp.leading)
             $0.top.equalTo(liked.snp.bottom).offset(inset)
             $0.trailing.equalToSuperview().inset(inset)
             $0.height.equalTo(200.0)
         }
-        
+
         learned.snp.makeConstraints {
             $0.leading.equalTo(liked.snp.leading)
             $0.top.equalTo(likedTextView.snp.bottom).offset(20.0)
             $0.trailing.equalToSuperview().inset(inset)
             $0.height.equalTo(30.0)
         }
-        
+
         learnedTextView.snp.makeConstraints {
             $0.leading.equalTo(liked.snp.leading)
             $0.top.equalTo(learned.snp.bottom).offset(inset)
             $0.trailing.equalToSuperview().inset(inset)
             $0.height.equalTo(200.0)
         }
-        
+
         lacked.snp.makeConstraints {
             $0.leading.equalTo(liked.snp.leading)
             $0.top.equalTo(learnedTextView.snp.bottom).offset(20.0)
             $0.trailing.equalToSuperview().inset(inset)
             $0.height.equalTo(30.0)
         }
-        
+
         lackedTextView.snp.makeConstraints {
             $0.leading.equalTo(liked.snp.leading)
             $0.top.equalTo(lacked.snp.bottom).offset(inset)
             $0.trailing.equalToSuperview().inset(inset)
             $0.height.equalTo(200.0)
         }
-        
+
         longedFor.snp.makeConstraints {
             $0.leading.equalTo(liked.snp.leading)
             $0.top.equalTo(lackedTextView.snp.bottom).offset(20.0)
             $0.trailing.equalToSuperview().inset(inset)
             $0.height.equalTo(30.0)
         }
-        
+
         longedForTextView.snp.makeConstraints {
             $0.leading.equalTo(liked.snp.leading)
             $0.top.equalTo(longedFor.snp.bottom).offset(inset)
@@ -274,7 +269,7 @@ private extension AddRetroViewController {
             $0.bottom.equalToSuperview().inset(inset)
             $0.height.equalTo(200.0)
         }
-        
+    
     }
 
 }
