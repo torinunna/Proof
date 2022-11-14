@@ -9,6 +9,46 @@ import SnapKit
 import UIKit
 
 class AddRetroViewController: UIViewController {
+   
+    private lazy var dailyButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Daily", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 20.0, weight: .medium)
+        button.backgroundColor = .systemBlue
+        button.layer.cornerRadius = 3.0
+        return button
+    }()
+    
+    private lazy var weeklyButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Weekly", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 20.0, weight: .medium)
+        button.backgroundColor = .systemBlue
+        button.layer.cornerRadius = 3.0
+        return button
+    }()
+    
+    private lazy var monthlyButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Monthly", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 20.0, weight: .medium)
+        button.backgroundColor = .systemBlue
+        button.layer.cornerRadius = 3.0
+        return button
+    }()
+    
+    private lazy var quarterlyButton: UIButton = {
+            let button = UIButton()
+            button.setTitle("Quarterly", for: .normal)
+            button.setTitleColor(.white, for: .normal)
+            button.titleLabel?.font = .systemFont(ofSize: 20.0, weight: .medium)
+            button.backgroundColor = .systemBlue
+            button.layer.cornerRadius = 3.0
+            return button
+    }()
 
     private let scrollView: UIScrollView = {
         let view = UIScrollView()
@@ -160,14 +200,27 @@ private extension AddRetroViewController {
             $0.edges.equalTo(scrollView.contentLayoutGuide)
             $0.height.greaterThanOrEqualTo(view.snp.height).priority(.low)
         }
-   
-        [liked, likedTextView, learned, learnedTextView, lacked, lackedTextView, longedFor, longedForTextView].forEach { contentView.addSubview($0) }
+        
+        let stackView = UIStackView(arrangedSubviews: [dailyButton, weeklyButton, monthlyButton, quarterlyButton])
+        stackView.axis = .horizontal
+        stackView.alignment = .center
+        stackView.spacing = 2.0
+        stackView.distribution = .fillEqually
+        
+        [stackView, liked, likedTextView, learned, learnedTextView, lacked, lackedTextView, longedFor, longedForTextView].forEach { contentView.addSubview($0) }
         
         let inset: CGFloat = 15.0
         
+        stackView.snp.makeConstraints {
+            $0.leading.equalToSuperview().inset(10.0)
+            $0.top.equalToSuperview().inset(10.0)
+            $0.trailing.equalToSuperview().inset(10.0)
+            $0.height.equalTo(40.0)
+        }
+        
         liked.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(inset)
-            $0.top.equalToSuperview().inset(inset)
+            $0.top.equalTo(stackView.snp.bottom).offset(inset)
             $0.trailing.equalToSuperview().inset(inset)
             $0.height.equalTo(30.0)
         }
