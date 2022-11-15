@@ -167,7 +167,8 @@ private extension AddRetroViewController {
         
         let cancelButton = UIBarButtonItem(image: UIImage(systemName: "arrow.backward"), style: .plain, target: self, action: #selector(cancelButtonPressed))
         navigationItem.leftBarButtonItem = cancelButton
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(saveButtonPressed))
+        let saveButton = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(saveButtonPressed))
+        navigationItem.rightBarButtonItem = saveButton
     }
     
     @objc func cancelButtonPressed() {
