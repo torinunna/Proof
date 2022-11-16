@@ -22,45 +22,7 @@ class AddRetroViewController: UIViewController {
         return view
     }()
     
-    private lazy var dailyButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("Daily", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 20.0, weight: .medium)
-        button.backgroundColor = .systemBlue
-        button.layer.cornerRadius = 3.0
-        return button
-    }()
-    
-    private lazy var weeklyButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("Weekly", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 20.0, weight: .medium)
-        button.backgroundColor = .systemBlue
-        button.layer.cornerRadius = 3.0
-        return button
-    }()
-    
-    private lazy var monthlyButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("Monthly", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 20.0, weight: .medium)
-        button.backgroundColor = .systemBlue
-        button.layer.cornerRadius = 3.0
-        return button
-    }()
-    
-    private lazy var quarterlyButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("Daily", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 20.0, weight: .medium)
-        button.backgroundColor = .systemBlue
-        button.layer.cornerRadius = 3.0
-        return button
-    }()
+   
     
     private lazy var liked: UILabel = {
         let label = UILabel()
@@ -160,11 +122,7 @@ extension AddRetroViewController: UITextViewDelegate {
 private extension AddRetroViewController {
     
     func setUpNavigationBar() {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy년 MM월 dd일(E)"
-        let today = dateFormatter.string(from: Date())
-        navigationItem.title = "\(today)"
-        
+        navigationItem.title = "회고 작성"
         let cancelButton = UIBarButtonItem(image: UIImage(systemName: "arrow.backward"), style: .plain, target: self, action: #selector(cancelButtonPressed))
         navigationItem.leftBarButtonItem = cancelButton
         let saveButton = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(saveButtonPressed))
@@ -198,25 +156,14 @@ private extension AddRetroViewController {
             $0.edges.equalTo(scrollView.contentLayoutGuide)
             $0.height.greaterThanOrEqualTo(view.snp.height).priority(.low)
         }
-        
-        let buttonStackView = UIStackView(arrangedSubviews: [dailyButton, weeklyButton, monthlyButton, quarterlyButton])
-        buttonStackView.spacing = 3.0
-        buttonStackView.distribution = .fillEqually
-        
-        [buttonStackView, liked, likedTextView, learned, learnedTextView, lacked, lackedTextView, longedFor, longedForTextView].forEach { contentView.addSubview($0) }
+
+        [liked, likedTextView, learned, learnedTextView, lacked, lackedTextView, longedFor, longedForTextView].forEach { contentView.addSubview($0) }
     
         let inset: CGFloat = 15.0
-        
-        buttonStackView.snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(10.0)
-            $0.top.equalToSuperview().inset(10.0)
-            $0.trailing.equalToSuperview().inset(10.0)
-            $0.height.equalTo(40.0)
-        }
-
+    
         liked.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(inset)
-            $0.top.equalTo(buttonStackView.snp.bottom).offset(inset)
+            $0.top.equalToSuperview().inset(inset)
             $0.trailing.equalToSuperview().inset(inset)
             $0.height.equalTo(30.0)
         }
