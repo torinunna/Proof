@@ -33,9 +33,38 @@ class RetroListCell: UITableViewCell {
     private lazy var likedContents: UILabel = {
         let label = UILabel()
         label.text = "오늘 목표 달성"
-        label.font = .systemFont(ofSize: 13.0, weight: .medium)
+        label.font = .systemFont(ofSize: 15.0, weight: .medium)
         return label
     }()
+
+    private lazy var learnedLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Learned"
+        label.font = .systemFont(ofSize: 15.0, weight: .semibold)
+        return label
+    }()
+    
+    private lazy var learnedContents: UILabel = {
+        let label = UILabel()
+        label.text = "캘린더 구현"
+        label.font = .systemFont(ofSize: 15.0, weight: .medium)
+        return label
+    }()
+    
+    private lazy var lackedLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Lacked"
+        label.font = .systemFont(ofSize: 15.0, weight: .semibold)
+        return label
+    }()
+    
+    private lazy var lackedContents: UILabel = {
+        let label = UILabel()
+        label.text = "버튼스택뷰"
+        label.font = .systemFont(ofSize: 15.0, weight: .medium)
+        return label
+    }()
+    
     
     private lazy var longedForLabel: UILabel = {
         let label = UILabel()
@@ -47,52 +76,73 @@ class RetroListCell: UITableViewCell {
     private lazy var longedForContents: UILabel = {
         let label = UILabel()
         label.text = "내일 목표 달성"
-        label.font = .systemFont(ofSize: 13.0, weight: .medium)
+        label.font = .systemFont(ofSize: 15.0, weight: .medium)
         return label
     }()
     
+    
     func setUp() {
-        [categorylabel, gradeImageView, likedLabel, likedContents, longedForLabel, longedForContents].forEach { addSubview($0) }
+        
+        let stackView = UIStackView(arrangedSubviews: [categorylabel, gradeImageView])
+        stackView.spacing = 1.0
+        stackView.distribution = .fillEqually
+        
+        [stackView, likedLabel, likedContents, learnedLabel, learnedContents, lackedLabel, lackedContents, longedForLabel, longedForContents].forEach { addSubview($0) }
         
         let inset: CGFloat = 15.0
         
-        categorylabel.snp.makeConstraints {
+        stackView.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(inset)
             $0.top.equalToSuperview().inset(inset)
             $0.trailing.equalToSuperview().inset(inset)
         }
         
-        let width: CGFloat = 100.0
-        
-        gradeImageView.snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(inset)
-            $0.top.equalTo(categorylabel.snp.bottom).offset(inset)
-            $0.width.equalTo(width)
-            $0.height.equalTo(width)
-        }
-        
         likedLabel.snp.makeConstraints {
-            $0.leading.equalTo(gradeImageView.snp.trailing).offset(inset)
-            $0.top.equalTo(gradeImageView.snp.top)
-            $0.trailing.equalToSuperview().inset(inset)
+            $0.leading.equalToSuperview().inset(inset)
+            $0.top.equalTo(stackView.snp.bottom).offset(5.0)
+            $0.width.equalTo(120.0)
         }
         
         likedContents.snp.makeConstraints {
-            $0.leading.equalTo(likedLabel.snp.leading)
+            $0.leading.equalTo(likedLabel.snp.trailing).offset(5.0)
+            $0.top.equalTo(likedLabel.snp.top)
+            $0.trailing.equalToSuperview().inset(inset)
+        }
+        
+        learnedLabel.snp.makeConstraints {
+            $0.leading.equalToSuperview().inset(inset)
             $0.top.equalTo(likedLabel.snp.bottom).offset(5.0)
-            $0.trailing.equalTo(likedLabel.snp.trailing)
+            $0.width.equalTo(120.0)
+        }
+        
+        learnedContents.snp.makeConstraints {
+            $0.leading.equalTo(learnedLabel.snp.trailing).offset(5.0)
+            $0.top.equalTo(learnedLabel.snp.top)
+            $0.trailing.equalToSuperview().inset(inset)
+        }
+        
+        lackedLabel.snp.makeConstraints {
+            $0.leading.equalToSuperview().inset(inset)
+            $0.top.equalTo(learnedLabel.snp.bottom).offset(5.0)
+            $0.width.equalTo(120.0)
+        }
+        
+        lackedContents.snp.makeConstraints {
+            $0.leading.equalTo(lackedLabel.snp.trailing).offset(5.0)
+            $0.top.equalTo(lackedLabel.snp.top)
+            $0.trailing.equalToSuperview().inset(inset)
         }
         
         longedForLabel.snp.makeConstraints {
-            $0.leading.equalTo(likedLabel.snp.leading)
-            $0.top.equalTo(likedContents.snp.bottom).offset(7.0)
-            $0.trailing.equalTo(likedLabel.snp.trailing)
+            $0.leading.equalToSuperview().inset(inset)
+            $0.top.equalTo(lackedLabel.snp.bottom).offset(5.0)
+            $0.width.equalTo(120.0)
         }
         
         longedForContents.snp.makeConstraints {
-            $0.leading.equalTo(likedLabel.snp.leading)
-            $0.top.equalTo(longedForLabel.snp.bottom).offset(5.0)
-            $0.trailing.equalTo(likedLabel.snp.trailing)
+            $0.leading.equalTo(lackedLabel.snp.trailing).offset(5.0)
+            $0.top.equalTo(longedForLabel.snp.top)
+            $0.trailing.equalToSuperview().inset(inset)
             $0.bottom.equalToSuperview().inset(inset)
         }
         
