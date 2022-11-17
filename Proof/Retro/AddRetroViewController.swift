@@ -21,8 +21,22 @@ class AddRetroViewController: UIViewController {
         view.backgroundColor = .systemBackground
         return view
     }()
+
+    private var retroDate: Date?
     
-   
+    private lazy var dateLabel: UILabel = {
+        let label = UILabel()
+        label.text = "날짜"
+        label.font = .systemFont(ofSize: 25.0, weight: .bold)
+        return label
+    }()
+    
+    private lazy var dateTextField: UITextField = {
+        let textField = UITextField()
+        textField.layer.borderWidth = 1.0
+        textField.layer.cornerRadius = 10.0
+        return textField
+    }()
     
     private lazy var liked: UILabel = {
         let label = UILabel()
@@ -105,6 +119,11 @@ class AddRetroViewController: UIViewController {
         
         setUpNavigationBar()
         setUpLayout()
+        configureDate()
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
 }
 
@@ -137,7 +156,22 @@ private extension AddRetroViewController {
         dismiss(animated: true)
     }
     
+    func configureDate() {
+        let datePicker = UIDatePicker()
+        datePicker.preferredDatePickerStyle = .wheels
+        datePicker.datePickerMode = .date
+        datePicker.addTarget(self, action: #selector(datePickerValueDidChange(_:)), for: .valueChanged)
+        datePicker.locale = Locale(identifier: "ko-KR")
+        dateTextField.inputView = datePicker
+    }
     
+    @objc func datePickerValueDidChange(_ datePicker: UIDatePicker) {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy년 MM월 dd일(EEEEE)"
+        formatter.locale = Locale(identifier: "ko_KR")
+        retroDate = datePicker.date
+        dateTextField.text = formatter.string(from: datePicker.date)
+    }
     //MARK:  - Layout
     
     func setUpLayout() {
@@ -157,13 +191,27 @@ private extension AddRetroViewController {
             $0.height.greaterThanOrEqualTo(view.snp.height).priority(.low)
         }
 
-        [liked, likedTextView, learned, learnedTextView, lacked, lackedTextView, longedFor, longedForTextView].forEach { contentView.addSubview($0) }
+        [dateLabel, dateTextField, liked, likedTextView, learned, learnedTextView, lacked, lackedTextView, longedFor, longedForTextView].forEach { contentView.addSubview($0) }
     
         let inset: CGFloat = 15.0
-    
+        
+        dateLabel.snp.makeConstraints {
+            $0.leading.equalToSuperview().inset(30)
+            $0.top.equalToSuperview().inset(inset)
+            $0.width.equalTo(100)
+            $0.height.equalTo(30.0)
+        }
+        
+        dateTextField.snp.makeConstraints {
+            $0.leading.equalTo(dateLabel.snp.trailing).offset(5.0)
+            $0.top.equalTo(dateLabel.snp.top)
+            $0.trailing.equalToSuperview().inset(inset)
+            $0.height.equalTo(30.0)
+        }
+        
         liked.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(inset)
-            $0.top.equalToSuperview().inset(inset)
+            $0.top.equalTo(dateLabel.snp.bottom).offset(inset)
             $0.trailing.equalToSuperview().inset(inset)
             $0.height.equalTo(30.0)
         }
