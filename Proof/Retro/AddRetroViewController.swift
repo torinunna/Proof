@@ -144,7 +144,7 @@ private extension AddRetroViewController {
         navigationItem.title = "회고 작성"
         let cancelButton = UIBarButtonItem(image: UIImage(systemName: "arrow.backward"), style: .plain, target: self, action: #selector(cancelButtonPressed))
         navigationItem.leftBarButtonItem = cancelButton
-        let saveButton = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(saveButtonPressed))
+        let saveButton = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(savePressed))
         navigationItem.rightBarButtonItem = saveButton
     }
     
@@ -152,9 +152,12 @@ private extension AddRetroViewController {
         dismiss(animated: true)
     }
     
-    @objc func saveButtonPressed() {
-        dismiss(animated: true)
-    }
+    @objc func savePressed() {
+        let vc = PopUpViewController()
+        let navVc = UINavigationController(rootViewController: vc)
+        navVc.modalPresentationStyle = .fullScreen
+        self.present(navVc, animated: true)
+}
     
     func configureDate() {
         let datePicker = UIDatePicker()

@@ -16,13 +16,13 @@ class RetroViewController: UIViewController {
         return label
     }()
     
-    private lazy var nextWeekButton: UIButton = {
+    private lazy var nextWeekBtn: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "arrow.right"), for: .normal)
         return button
     }()
     
-    private lazy var previousWeekButton: UIButton = {
+    private lazy var previousWeekBtn: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "arrow.left"), for: .normal)
         return button
@@ -210,7 +210,7 @@ private extension RetroViewController {
     }
     
     func previousWeek() {
-        previousWeekButton.addTarget(self, action: #selector(previousWeekPressed), for: .touchUpInside)
+        previousWeekBtn.addTarget(self, action: #selector(previousWeekPressed), for: .touchUpInside)
     }
     
     @objc func previousWeekPressed() {
@@ -219,7 +219,7 @@ private extension RetroViewController {
     }
     
     func nextWeek() {
-        nextWeekButton.addTarget(self, action: #selector(nextWeekPressed), for: .touchUpInside)
+        nextWeekBtn.addTarget(self, action: #selector(nextWeekPressed), for: .touchUpInside)
     }
     
     @objc func nextWeekPressed() {
@@ -236,7 +236,7 @@ private extension RetroViewController {
         dayStackView.spacing = 4.0
         dayStackView.distribution = .fillEqually
         
-        [previousWeekButton, monthLabel, nextWeekButton, dayStackView, collectionView, tableView].forEach { view.addSubview($0) }
+        [previousWeekBtn, monthLabel, nextWeekBtn, dayStackView, collectionView, tableView].forEach { view.addSubview($0) }
         
         let inset: CGFloat = 15.0
         let buttonWidth: CGFloat = 25.0
@@ -246,14 +246,14 @@ private extension RetroViewController {
             $0.top.equalTo(view.safeAreaLayoutGuide).inset(inset)
         }
         
-        previousWeekButton.snp.makeConstraints {
+        previousWeekBtn.snp.makeConstraints {
             $0.trailing.equalTo(monthLabel.snp.leading).offset(-100.0)
             $0.centerY.equalTo(monthLabel.snp.centerY)
             $0.width.equalTo(buttonWidth)
             $0.height.equalTo(buttonWidth)
         }
         
-        nextWeekButton.snp.makeConstraints {
+        nextWeekBtn.snp.makeConstraints {
             $0.leading.equalTo(monthLabel.snp.trailing).offset(100.0)
             $0.centerY.equalTo(monthLabel.snp.centerY)
             $0.width.equalTo(buttonWidth)
