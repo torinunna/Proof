@@ -86,9 +86,9 @@
 			children = (
 				86123C3E2918E44F0004748F /* AppDelegate.swift */,
 				86123C402918E44F0004748F /* SceneDelegate.swift */,
+				86F54AA5292BB42A00856261 /* UIButton+.swift */,
 				86123C422918E44F0004748F /* TabBarController.swift */,
 				86123C69291941E90004748F /* SignInViewController.swift */,
-				86F54AA5292BB42A00856261 /* UIButton+.swift */,
 				86C4C808291A33A9009A0621 /* SignUpViewController.swift */,
 				86123C5B2918F50E0004748F /* Retro */,
 				86123C5C2918F5130004748F /* Calendar */,

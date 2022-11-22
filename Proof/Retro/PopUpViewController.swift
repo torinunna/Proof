@@ -10,6 +10,12 @@ import UIKit
 
 class PopUpViewController: UIViewController {
     
+    private lazy var backgroundView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.black.withAlphaComponent(0.2)
+        return view
+    }()
+
     private lazy var containerView: UIView = {
         let view = UIView()
         view.layer.cornerRadius = 8
@@ -63,24 +69,15 @@ class PopUpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setUpNavigationItem()
         setUpLayout()
         doneButton()
+        backgroundDismiss()
     }
 
 }
 
 private extension PopUpViewController {
-    
-    func setUpNavigationItem() {
-        let cancelButton = UIBarButtonItem(image: UIImage(systemName: "arrow.backward"), style: .plain, target: self, action: #selector(cancelButtonPressed))
-        navigationItem.leftBarButtonItem = cancelButton
-    }
-    
-    @objc func cancelButtonPressed() {
-        dismiss(animated: true)
-    }
-    
+        
     func doneButton() {
         doneBtn.addTarget(self, action: #selector(donePressed), for: .touchUpInside)
     }
@@ -89,18 +86,35 @@ private extension PopUpViewController {
        dismiss(animated: true)
     }
     
+    func backgroundDismiss() {
+        backgroundView.addGestureRecognizer(UITapGestureRecognizer(target: self, action:#selector(backgroundTap(_:))))
+    }
+    
+    @objc func backgroundTap(_ sender: UITapGestureRecognizer){
+        self.dismiss(animated: false, completion: nil)
+      }
+    
     func setUpLayout() {
+        
+        view.addSubview(backgroundView)
+        
+        backgroundView.snp.makeConstraints {
+            $0.leading.equalTo(view.safeAreaLayoutGuide)
+            $0.top.equalTo(view.safeAreaLayoutGuide)
+            $0.trailing.equalTo(view.safeAreaLayoutGuide)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide)
+        }
         
         let buttonStackView = UIStackView(arrangedSubviews: [goodBtn, normalBtn, badBtn])
         buttonStackView.spacing = 4.0
         buttonStackView.distribution = .fillEqually
         
         [titleLabel, buttonStackView, doneBtn].forEach { containerView.addSubview($0) }
-        view.addSubview(containerView)
+        backgroundView.addSubview(containerView)
         
         containerView.snp.makeConstraints {
-            $0.centerX.equalTo(view.safeAreaLayoutGuide)
-            $0.centerY.equalTo(view.safeAreaLayoutGuide)
+            $0.centerX.equalTo(backgroundView)
+            $0.centerY.equalTo(backgroundView)
             $0.height.equalTo(250.0)
             $0.width.equalTo(300.0)
         }

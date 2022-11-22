@@ -154,9 +154,8 @@ private extension AddRetroViewController {
     
     @objc func savePressed() {
         let vc = PopUpViewController()
-        let navVc = UINavigationController(rootViewController: vc)
-        navVc.modalPresentationStyle = .fullScreen
-        self.present(navVc, animated: true)
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true)
 }
     
     func configureDate() {
