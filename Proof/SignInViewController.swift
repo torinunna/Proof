@@ -36,6 +36,7 @@ class SignInViewController: UIViewController {
         textField.layer.borderWidth = 0.5
         textField.layer.borderColor = UIColor.blue.cgColor
         textField.placeholder = "비밀번호를 입력하세요."
+        textField.isSecureTextEntry = true
         textField.textColor = .label
         textField.font = .systemFont(ofSize: 15.0)
         
