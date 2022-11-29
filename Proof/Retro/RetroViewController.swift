@@ -276,7 +276,7 @@ private extension RetroViewController {
         
         tableView.snp.makeConstraints {
             $0.leading.equalTo(view.safeAreaLayoutGuide).inset(inset)
-            $0.top.equalTo(collectionView.snp.bottom)
+            $0.top.equalTo(collectionView.snp.bottom).offset(10)
             $0.trailing.equalTo(view.safeAreaLayoutGuide).inset(inset)
             $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(inset)
         }
