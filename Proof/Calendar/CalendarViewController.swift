@@ -164,7 +164,6 @@ extension CalendarViewController: UICollectionViewDelegateFlowLayout {
 private extension CalendarViewController {
     
     func setUpNavigationBar() {
-        navigationItem.title = "Calendar"
         let addButton = UIBarButtonItem(image: UIImage(systemName: "plus.circle"), style: .plain, target: self, action: #selector(addButtonPressed))
         navigationItem.rightBarButtonItem = addButton
     }
