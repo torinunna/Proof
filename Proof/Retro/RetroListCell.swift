@@ -83,23 +83,26 @@ class RetroListCell: UITableViewCell {
     
     func setUp() {
         
-        let stackView = UIStackView(arrangedSubviews: [categorylabel, gradeImageView])
-        stackView.spacing = 1.0
-        stackView.distribution = .fillEqually
-        
-        [stackView, likedLabel, likedContents, learnedLabel, learnedContents, lackedLabel, lackedContents, longedForLabel, longedForContents].forEach { addSubview($0) }
+        [gradeImageView, categorylabel, likedLabel, likedContents, learnedLabel, learnedContents, lackedLabel, lackedContents, longedForLabel, longedForContents].forEach { addSubview($0) }
         
         let inset: CGFloat = 15.0
-        
-        stackView.snp.makeConstraints {
+    
+        gradeImageView.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(inset)
             $0.top.equalToSuperview().inset(inset)
+            $0.width.equalTo(20.0)
+            $0.height.equalTo(gradeImageView.snp.width)
+        }
+        
+        categorylabel.snp.makeConstraints {
+            $0.leading.equalTo(gradeImageView.snp.trailing).offset(8.0)
+            $0.top.equalTo(gradeImageView.snp.top)
             $0.trailing.equalToSuperview().inset(inset)
         }
         
         likedLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(inset)
-            $0.top.equalTo(stackView.snp.bottom).offset(5.0)
+            $0.top.equalTo(gradeImageView.snp.bottom).offset(5.0)
             $0.width.equalTo(120.0)
         }
         
