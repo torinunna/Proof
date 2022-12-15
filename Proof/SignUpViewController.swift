@@ -42,22 +42,20 @@ class SignUpViewController: UIViewController {
         return textField
     }()
     
-    let signUpBtn: UIButton = {
+    let signUpButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("가입하기", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 17.0, weight: .semibold)
         button.tintColor = .white
         button.backgroundColor = .systemBlue
         button.layer.cornerRadius = 8.0
-        
+        button.addTarget(self, action: #selector(signUpBtnPressed), for: .touchUpInside)
         return button
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setUpLayout()
-        signUpButton()
     }
 
 }
@@ -65,12 +63,8 @@ class SignUpViewController: UIViewController {
 //MARK:  - Extension
 
 private extension SignUpViewController {
-    
-    func signUpButton() {
-        signUpBtn.addTarget(self, action: #selector(signUpPressed), for: .touchUpInside)
-    }
  
-    @objc func signUpPressed() {
+    @objc func signUpBtnPressed() {
         if let email = idTextField.text, let password = pwTextField.text {
             Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
                 if let e = error {
@@ -93,7 +87,7 @@ private extension SignUpViewController {
     
     func setUpLayout() {
         
-        [titleLabel, idTextField, pwTextField, signUpBtn].forEach { view.addSubview($0) }
+        [titleLabel, idTextField, pwTextField, signUpButton].forEach { view.addSubview($0) }
         
         view.backgroundColor = .white
         
@@ -119,7 +113,7 @@ private extension SignUpViewController {
             $0.height.equalTo(30.0)
         }
 
-        signUpBtn.snp.makeConstraints {
+        signUpButton.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(40.0)
             $0.top.equalTo(pwTextField.snp.bottom).offset(50.0)
             $0.trailing.equalToSuperview().inset(40.0)

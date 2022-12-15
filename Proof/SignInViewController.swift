@@ -43,25 +43,25 @@ class SignInViewController: UIViewController {
         return textField
     }()
     
-    let signInBtn: UIButton = {
+    let signInButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("로그인", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 17.0, weight: .semibold)
         button.tintColor = .white
         button.backgroundColor = .systemBlue
         button.layer.cornerRadius = 4.0
-        
+        button.addTarget(self, action: #selector(signInBtnPressed), for: .touchUpInside)
         return button
     }()
     
-    let signUpBtn: UIButton = {
+    let signUpButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("회원가입", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 17.0, weight: .semibold)
         button.tintColor = .white
         button.backgroundColor = .systemBlue
         button.layer.cornerRadius = 4.0
-        
+        button.addTarget(self, action: #selector(signUpBtnPressed), for: .touchUpInside)
         return button
     }()
     
@@ -69,8 +69,6 @@ class SignInViewController: UIViewController {
         super.viewDidLoad()
         
         setUpLayout()
-        signUpButton()
-        signInButton()
     }
     
 }
@@ -79,12 +77,7 @@ class SignInViewController: UIViewController {
 
 private extension SignInViewController {
     
-    func signInButton() {
-        signInBtn.addTarget(self, action: #selector(signInPressed), for: .touchUpInside)
-    }
-    
-    @objc func signInPressed() {
-        
+    @objc func signInBtnPressed() {
         if let email = idTextField.text, let password = pwTextField.text {
             Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
                 if let e = error {
@@ -96,14 +89,9 @@ private extension SignInViewController {
                 }
             }
         }
-        
     }
 
-    func signUpButton() {
-        signUpBtn.addTarget(self, action: #selector(signUpPressed), for: .touchUpInside)
-    }
- 
-    @objc func signUpPressed() {
+    @objc func signUpBtnPressed() {
         let vc = SignUpViewController()
         vc.modalPresentationStyle = .automatic
         self.present(vc, animated: true, completion: nil)
@@ -113,7 +101,7 @@ private extension SignInViewController {
     
     func setUpLayout() {
         
-        [titleLabel, idTextField, pwTextField, signInBtn, signUpBtn].forEach { view.addSubview($0) }
+        [titleLabel, idTextField, pwTextField, signInButton, signUpButton].forEach { view.addSubview($0) }
         
         let viewInset: CGFloat = 16.0
         
@@ -137,17 +125,17 @@ private extension SignInViewController {
             $0.height.equalTo(30.0)
         }
         
-        signInBtn.snp.makeConstraints {
+        signInButton.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(40.0)
             $0.top.equalTo(pwTextField.snp.bottom).offset(50.0)
             $0.trailing.equalToSuperview().inset(40.0)
             $0.height.equalTo(40.0)
         }
         
-        signUpBtn.snp.makeConstraints {
-            $0.leading.equalTo(signInBtn.snp.leading)
-            $0.top.equalTo(signInBtn.snp.bottom).offset(viewInset)
-            $0.trailing.equalTo(signInBtn.snp.trailing)
+        signUpButton.snp.makeConstraints {
+            $0.leading.equalTo(signInButton.snp.leading)
+            $0.top.equalTo(signInButton.snp.bottom).offset(viewInset)
+            $0.trailing.equalTo(signInButton.snp.trailing)
             $0.height.equalTo(40.0)
         }
         

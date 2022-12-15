@@ -142,17 +142,17 @@ private extension AddRetroViewController {
     
     func setUpNavigationBar() {
         navigationItem.title = "회고 작성"
-        let cancelButton = UIBarButtonItem(image: UIImage(systemName: "arrow.backward"), style: .plain, target: self, action: #selector(cancelButtonPressed))
+        let cancelButton = UIBarButtonItem(image: UIImage(systemName: "arrow.backward"), style: .plain, target: self, action: #selector(cancelBtnPressed))
         navigationItem.leftBarButtonItem = cancelButton
-        let saveButton = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(savePressed))
+        let saveButton = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(saveBtnPressed))
         navigationItem.rightBarButtonItem = saveButton
     }
     
-    @objc func cancelButtonPressed() {
+    @objc func cancelBtnPressed() {
         dismiss(animated: true)
     }
     
-    @objc func savePressed() {
+    @objc func saveBtnPressed() {
         let vc = PopUpViewController()
         vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: true)

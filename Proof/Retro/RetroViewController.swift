@@ -16,15 +16,17 @@ class RetroViewController: UIViewController {
         return label
     }()
     
-    private lazy var nextWeekBtn: UIButton = {
+    private lazy var nextWeekButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "arrow.right"), for: .normal)
+        button.addTarget(self, action: #selector(nextWeekBtnPressed), for: .touchUpInside)
         return button
     }()
     
-    private lazy var previousWeekBtn: UIButton = {
+    private lazy var previousWeekButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "arrow.left"), for: .normal)
+        button.addTarget(self, action: #selector(previousWeekBtnPressed), for: .touchUpInside)
         return button
     }()
     
@@ -117,8 +119,6 @@ class RetroViewController: UIViewController {
         setUpNavigationBar()
         setUpLayout()
         setMonthView()
-        previousWeek()
-        nextWeek()
     }
     
     func setMonthView() {
@@ -198,31 +198,23 @@ private extension RetroViewController {
     
     func setUpNavigationBar() {
         navigationItem.title = "나의 회고"
-        let addButton = UIBarButtonItem(image: UIImage(systemName: "plus.circle"), style: .plain, target: self, action: #selector(addButtonPressed))
+        let addButton = UIBarButtonItem(image: UIImage(systemName: "plus.circle"), style: .plain, target: self, action: #selector(addBtnPressed))
         navigationItem.rightBarButtonItem = addButton
     }
     
-    @objc func addButtonPressed() {
+    @objc func addBtnPressed() {
         let vc = AddRetroViewController()
         let navVc = UINavigationController(rootViewController: vc)
         navVc.modalPresentationStyle = .fullScreen
         self.present(navVc, animated: true)
     }
     
-    func previousWeek() {
-        previousWeekBtn.addTarget(self, action: #selector(previousWeekPressed), for: .touchUpInside)
-    }
-    
-    @objc func previousWeekPressed() {
+    @objc func previousWeekBtnPressed() {
         selectedDate = CalendarHelper().addDays(date: selectedDate, days: -7)
         setMonthView()
     }
     
-    func nextWeek() {
-        nextWeekBtn.addTarget(self, action: #selector(nextWeekPressed), for: .touchUpInside)
-    }
-    
-    @objc func nextWeekPressed() {
+    @objc func nextWeekBtnPressed() {
         selectedDate = CalendarHelper().addDays(date: selectedDate, days: 7)
         setMonthView()
     }
@@ -236,7 +228,7 @@ private extension RetroViewController {
         dayStackView.spacing = 4.0
         dayStackView.distribution = .fillEqually
         
-        [previousWeekBtn, monthLabel, nextWeekBtn, dayStackView, collectionView, tableView].forEach { view.addSubview($0) }
+        [previousWeekButton, monthLabel, nextWeekButton, dayStackView, collectionView, tableView].forEach { view.addSubview($0) }
         
         let inset: CGFloat = 15.0
         let buttonWidth: CGFloat = 25.0
@@ -246,14 +238,14 @@ private extension RetroViewController {
             $0.top.equalTo(view.safeAreaLayoutGuide).inset(inset)
         }
         
-        previousWeekBtn.snp.makeConstraints {
+        previousWeekButton.snp.makeConstraints {
             $0.trailing.equalTo(monthLabel.snp.leading).offset(-100.0)
             $0.centerY.equalTo(monthLabel.snp.centerY)
             $0.width.equalTo(buttonWidth)
             $0.height.equalTo(buttonWidth)
         }
         
-        nextWeekBtn.snp.makeConstraints {
+        nextWeekButton.snp.makeConstraints {
             $0.leading.equalTo(monthLabel.snp.trailing).offset(100.0)
             $0.centerY.equalTo(monthLabel.snp.centerY)
             $0.width.equalTo(buttonWidth)

@@ -19,12 +19,14 @@ class CalendarViewController: UIViewController {
     private lazy var nextMonthButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "arrow.right"), for: .normal)
+        button.addTarget(self, action: #selector(nextMonthBtnPressed), for: .touchUpInside)
         return button
     }()
     
     private lazy var previousMonthButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "arrow.left"), for: .normal)
+        button.addTarget(self, action: #selector(previousMonthBtnPressed), for: .touchUpInside)
         return button
     }()
     
@@ -107,8 +109,6 @@ class CalendarViewController: UIViewController {
         setUpNavigationBar()
         setUpLayout()
         setMonthView()
-        previousMonth()
-        nextMonth()
     }
     
     func setMonthView() {
@@ -164,31 +164,23 @@ extension CalendarViewController: UICollectionViewDelegateFlowLayout {
 private extension CalendarViewController {
     
     func setUpNavigationBar() {
-        let addButton = UIBarButtonItem(image: UIImage(systemName: "plus.circle"), style: .plain, target: self, action: #selector(addButtonPressed))
+        let addButton = UIBarButtonItem(image: UIImage(systemName: "plus.circle"), style: .plain, target: self, action: #selector(addBtnPressed))
         navigationItem.rightBarButtonItem = addButton
     }
     
-    @objc func addButtonPressed() {
+    @objc func addBtnPressed() {
         let vc = AddRetroViewController()
         let navVc = UINavigationController(rootViewController: vc)
         navVc.modalPresentationStyle = .fullScreen
         self.present(navVc, animated: true)
     }
-    
-    func previousMonth() {
-        previousMonthButton.addTarget(self, action: #selector(previousMonthPressed), for: .touchUpInside)
-    }
-    
-    @objc func previousMonthPressed() {
+
+    @objc func previousMonthBtnPressed() {
         selectedDate = CalendarHelper().minusMonth(date: selectedDate)
         setMonthView()
     }
     
-    func nextMonth() {
-        nextMonthButton.addTarget(self, action: #selector(nextMonthPressed), for: .touchUpInside)
-    }
-    
-    @objc func nextMonthPressed() {
+    @objc func nextMonthBtnPressed() {
         selectedDate = CalendarHelper().plusMonth(date: selectedDate)
         setMonthView()
     }

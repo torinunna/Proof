@@ -29,7 +29,7 @@ class PopUpViewController: UIViewController {
         return label
     }()
  
-    private lazy var goodBtn: UIButton = {
+    private lazy var goodButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "hand.thumbsup.fill"), for: .normal)
         button.setTitle("만족", for: .normal)
@@ -39,7 +39,7 @@ class PopUpViewController: UIViewController {
         return button
     }()
     
-    private lazy var normalBtn: UIButton = {
+    private lazy var normalButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "face.smiling.fill"), for: .normal)
         button.setTitle("보통", for: .normal)
@@ -49,7 +49,7 @@ class PopUpViewController: UIViewController {
         return button
     }()
     
-    private lazy var badBtn: UIButton = {
+    private lazy var badButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "hand.thumbsdown.fill"), for: .normal)
         button.setTitle("불만족", for: .normal)
@@ -59,10 +59,11 @@ class PopUpViewController: UIViewController {
         return button
     }()
 
-    private lazy var doneBtn: UIButton = {
+    private lazy var doneButton: UIButton = {
         let button = UIButton()
         button.setTitle("확인", for: .normal)
         button.setTitleColor(UIColor.systemBlue, for: .normal)
+        button.addTarget(self, action: #selector(doneBtnPressed), for: .touchUpInside)
         return button
     }()
     
@@ -70,19 +71,14 @@ class PopUpViewController: UIViewController {
         super.viewDidLoad()
         
         setUpLayout()
-        doneButton()
         backgroundDismiss()
     }
 
 }
 
 private extension PopUpViewController {
-        
-    func doneButton() {
-        doneBtn.addTarget(self, action: #selector(donePressed), for: .touchUpInside)
-    }
-    
-    @objc func donePressed() {
+ 
+    @objc func doneBtnPressed() {
        dismiss(animated: true)
     }
     
@@ -105,11 +101,11 @@ private extension PopUpViewController {
             $0.bottom.equalTo(view.safeAreaLayoutGuide)
         }
         
-        let buttonStackView = UIStackView(arrangedSubviews: [goodBtn, normalBtn, badBtn])
+        let buttonStackView = UIStackView(arrangedSubviews: [goodButton, normalButton, badButton])
         buttonStackView.spacing = 4.0
         buttonStackView.distribution = .fillEqually
         
-        [titleLabel, buttonStackView, doneBtn].forEach { containerView.addSubview($0) }
+        [titleLabel, buttonStackView, doneButton].forEach { containerView.addSubview($0) }
         backgroundView.addSubview(containerView)
         
         containerView.snp.makeConstraints {
@@ -126,17 +122,17 @@ private extension PopUpViewController {
         
         let buttonWidth: CGFloat = 60.0
         
-        goodBtn.snp.makeConstraints {
+        goodButton.snp.makeConstraints {
             $0.height.equalTo(buttonWidth)
             $0.width.equalTo(buttonWidth)
         }
         
-        normalBtn.snp.makeConstraints {
+        normalButton.snp.makeConstraints {
             $0.height.equalTo(buttonWidth)
             $0.width.equalTo(buttonWidth)
         }
         
-        badBtn.snp.makeConstraints{
+        badButton.snp.makeConstraints{
             $0.height.equalTo(buttonWidth)
             $0.width.equalTo(buttonWidth)
         }
@@ -146,7 +142,7 @@ private extension PopUpViewController {
             $0.centerY.equalTo(containerView)
         }
         
-        doneBtn.snp.makeConstraints {
+        doneButton.snp.makeConstraints {
             $0.centerX.equalTo(containerView)
             $0.top.equalTo(buttonStackView.snp.bottom).offset(30.0)
         }
