@@ -43,7 +43,7 @@ class SignInViewController: UIViewController {
         return textField
     }()
     
-    let signInButton: UIButton = {
+    private lazy var signInButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("로그인", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 17.0, weight: .semibold)
@@ -54,7 +54,7 @@ class SignInViewController: UIViewController {
         return button
     }()
     
-    let signUpButton: UIButton = {
+    private lazy var signUpButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("회원가입", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 17.0, weight: .semibold)

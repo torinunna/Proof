@@ -42,7 +42,7 @@ class SignUpViewController: UIViewController {
         return textField
     }()
     
-    let signUpButton: UIButton = {
+    private lazy var signUpButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("가입하기", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 17.0, weight: .semibold)
