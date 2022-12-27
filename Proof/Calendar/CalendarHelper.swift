@@ -20,13 +20,15 @@ class CalendarHelper {
     
     func monthString(date: Date) -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "LLLL"
+        dateFormatter.locale = Locale(identifier: "ko_kr")
+        dateFormatter.dateFormat = "MM월"
         return dateFormatter.string(from: date)
     }
     
     func yearString(date: Date) -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy"
+        dateFormatter.locale = Locale(identifier: "ko_kr")
+        dateFormatter.dateFormat = "yyyy년"
         return dateFormatter.string(from: date)
     }
     

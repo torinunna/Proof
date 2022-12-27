@@ -10,6 +10,12 @@ import UIKit
 
 class RetroViewController: UIViewController {
         
+    private lazy var yearLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 17.0, weight: .medium)
+        return label
+    }()
+    
     private lazy var monthLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 30.0, weight: .bold)
@@ -131,7 +137,8 @@ class RetroViewController: UIViewController {
             totalSquares.append(current)
             current = CalendarHelper().addDays(date: current, days: 1)
         }
-        monthLabel.text = CalendarHelper().monthString(date: selectedDate) + " "
+        yearLabel.text = CalendarHelper().yearString(date: selectedDate)
+        monthLabel.text = CalendarHelper().monthString(date: selectedDate)
         collectionView.reloadData()
     }
     
@@ -228,14 +235,18 @@ private extension RetroViewController {
         dayStackView.spacing = 4.0
         dayStackView.distribution = .fillEqually
         
-        [previousWeekButton, monthLabel, nextWeekButton, dayStackView, collectionView, tableView].forEach { view.addSubview($0) }
+        [previousWeekButton, yearLabel, monthLabel, nextWeekButton, dayStackView, collectionView, tableView].forEach { view.addSubview($0) }
         
         let inset: CGFloat = 15.0
         let buttonWidth: CGFloat = 25.0
         
-        monthLabel.snp.makeConstraints {
+        yearLabel.snp.makeConstraints {
             $0.centerX.equalTo(view.safeAreaLayoutGuide)
             $0.top.equalTo(view.safeAreaLayoutGuide).inset(inset)
+        }
+        monthLabel.snp.makeConstraints {
+            $0.centerX.equalTo(view.safeAreaLayoutGuide)
+            $0.top.equalTo(yearLabel.snp.bottom).offset(6.0)
         }
         
         previousWeekButton.snp.makeConstraints {

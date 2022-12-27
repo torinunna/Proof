@@ -9,6 +9,12 @@ import SnapKit
 import UIKit
 
 class CalendarViewController: UIViewController {
+    
+    private lazy var yearLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 17.0, weight: .medium)
+        return label
+    }()
         
     private lazy var monthLabel: UILabel = {
         let label = UILabel()
@@ -128,7 +134,8 @@ class CalendarViewController: UIViewController {
             }
             count += 1
         }
-        monthLabel.text = CalendarHelper().monthString(date: selectedDate) + " "
+        yearLabel.text = CalendarHelper().yearString(date: selectedDate)
+        monthLabel.text = CalendarHelper().monthString(date: selectedDate)
         collectionView.reloadData()
     }
     
@@ -194,14 +201,18 @@ private extension CalendarViewController {
         dayStackView.spacing = 4.0
         dayStackView.distribution = .fillEqually
         
-        [previousMonthButton, monthLabel, nextMonthButton, dayStackView, collectionView].forEach { view.addSubview($0) }
+        [previousMonthButton, yearLabel, monthLabel, nextMonthButton, dayStackView, collectionView].forEach { view.addSubview($0) }
         
         let inset: CGFloat = 15.0
         let buttonWidth: CGFloat = 25.0
         
-        monthLabel.snp.makeConstraints {
+        yearLabel.snp.makeConstraints {
             $0.centerX.equalTo(view.safeAreaLayoutGuide)
             $0.top.equalTo(view.safeAreaLayoutGuide).inset(inset)
+        }
+        monthLabel.snp.makeConstraints {
+            $0.centerX.equalTo(view.safeAreaLayoutGuide)
+            $0.top.equalTo(yearLabel.snp.bottom).offset(6.0)
         }
         
         previousMonthButton.snp.makeConstraints {
