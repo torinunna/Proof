@@ -10,6 +10,8 @@ import UIKit
 
 class RetroListCell: UITableViewCell {
     
+    static let identifier = "RetroListCell"
+    
     private lazy var categorylabel:  UILabel = {
         let label = UILabel()
         label.text = "Daily"

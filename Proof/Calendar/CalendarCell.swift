@@ -10,6 +10,8 @@ import UIKit
 
 class CalendarCell: UICollectionViewCell {
     
+    static let identifier = "CalendarCell"
+    
     var dayOfMonth: UILabel = {
         let label = UILabel()
         label.textColor = .label
