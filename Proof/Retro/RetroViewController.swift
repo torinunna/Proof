@@ -36,63 +36,6 @@ class RetroViewController: UIViewController {
         return button
     }()
     
-    private lazy var sundayLabel: UILabel = {
-        let label = UILabel()
-        label.text = "일"
-        label.font = .systemFont(ofSize: 20.0, weight: .semibold)
-        label.textColor = .systemRed
-        label.textAlignment = .center
-        return label
-    }()
-    
-    private lazy var mondayLabel: UILabel = {
-        let label = UILabel()
-        label.text = "월"
-        label.font = .systemFont(ofSize: 20.0, weight: .semibold)
-        label.textAlignment = .center
-        return label
-    }()
-    
-    private lazy var tuesdayLabel: UILabel = {
-        let label = UILabel()
-        label.text = "화"
-        label.font = .systemFont(ofSize: 20.0, weight: .semibold)
-        label.textAlignment = .center
-        return label
-    }()
-    
-    private lazy var wednesdayLabel: UILabel = {
-        let label = UILabel()
-        label.text = "수"
-        label.font = .systemFont(ofSize: 20.0, weight: .semibold)
-        label.textAlignment = .center
-        return label
-    }()
-    
-    private lazy var thursdayLabel: UILabel = {
-        let label = UILabel()
-        label.text = "목"
-        label.font = .systemFont(ofSize: 20.0, weight: .semibold)
-        label.textAlignment = .center
-        return label
-    }()
-    
-    private lazy var fridayLabel: UILabel = {
-        let label = UILabel()
-        label.text = "금"
-        label.font = .systemFont(ofSize: 20.0, weight: .semibold)
-        label.textAlignment = .center
-        return label
-    }()
-    
-    private lazy var saturdayLabel: UILabel = {
-        let label = UILabel()
-        label.text = "토"
-        label.font = .systemFont(ofSize: 20.0, weight: .semibold)
-        label.textAlignment = .center
-        return label
-    }()
-    
     private lazy var selectedDate = Date()
     private lazy var totalSquares = [Date]()
     
@@ -231,11 +174,21 @@ private extension RetroViewController {
 
     func setUpLayout() {
         
-        let dayStackView = UIStackView(arrangedSubviews: [sundayLabel, mondayLabel, tuesdayLabel, wednesdayLabel, thursdayLabel, fridayLabel, saturdayLabel])
-        dayStackView.spacing = 4.0
-        dayStackView.distribution = .fillEqually
+        let weekdayStackView = UIStackView()
+        weekdayStackView.spacing = 4.0
+        weekdayStackView.distribution = .fillEqually
         
-        [previousWeekButton, yearLabel, monthLabel, nextWeekButton, dayStackView, collectionView, tableView].forEach { view.addSubview($0) }
+        let dayOfTheWeek = ["일", "월", "화", "수", "목", "금", "토"]
+        
+        for i in 0..<7 {
+            let label = UILabel()
+            label.text = dayOfTheWeek[i]
+            label.textAlignment = .center
+            label.font = .systemFont(ofSize: 20.0, weight: .semibold)
+            weekdayStackView.addArrangedSubview(label)
+        }
+        
+        [previousWeekButton, yearLabel, monthLabel, nextWeekButton, weekdayStackView, collectionView, tableView].forEach { view.addSubview($0) }
         
         let inset: CGFloat = 15.0
         let buttonWidth: CGFloat = 25.0
@@ -263,7 +216,7 @@ private extension RetroViewController {
             $0.height.equalTo(buttonWidth)
         }
         
-        dayStackView.snp.makeConstraints {
+        weekdayStackView.snp.makeConstraints {
             $0.leading.equalTo(view.safeAreaLayoutGuide).inset(inset)
             $0.top.equalTo(monthLabel.snp.bottom).offset(inset)
             $0.trailing.equalTo(view.safeAreaLayoutGuide).inset(inset)
@@ -272,9 +225,9 @@ private extension RetroViewController {
         
         collectionView.snp.makeConstraints {
             $0.leading.equalTo(view.safeAreaLayoutGuide).inset(inset)
-            $0.top.equalTo(dayStackView.snp.bottom)
+            $0.top.equalTo(weekdayStackView.snp.bottom)
             $0.trailing.equalTo(view.safeAreaLayoutGuide).inset(inset)
-            $0.height.equalTo(dayStackView.snp.height)
+            $0.height.equalTo(weekdayStackView.snp.height)
         }
         
         tableView.snp.makeConstraints {
