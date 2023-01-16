@@ -116,6 +116,8 @@ private extension CalendarViewController {
     func setUpNavigationBar() {
         let addButton = UIBarButtonItem(image: UIImage(systemName: "plus.circle"), style: .plain, target: self, action: #selector(addBtnPressed))
         navigationItem.rightBarButtonItem = addButton
+        let todayButton = UIBarButtonItem(title: "오늘", style: .plain, target: self, action: #selector(todayBtnPressed))
+        navigationItem.leftBarButtonItem = todayButton
     }
     
     @objc func addBtnPressed() {
@@ -123,6 +125,10 @@ private extension CalendarViewController {
         let navVc = UINavigationController(rootViewController: vc)
         navVc.modalPresentationStyle = .fullScreen
         self.present(navVc, animated: true)
+    }
+    
+    @objc func todayBtnPressed() {
+        
     }
 
     @objc func previousMonthBtnPressed() {
