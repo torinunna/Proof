@@ -133,7 +133,9 @@ private extension CalendarViewController {
     }
     
     @objc func todayBtnPressed() {
-        
+        let components = calendar.dateComponents([.year, .month], from: Date())
+        calendarDate = calendar.date(from: components) ?? Date()
+        updateDays()
     }
     
     //MARK:  - Layout
