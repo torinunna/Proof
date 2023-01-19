@@ -8,48 +8,32 @@
 import UIKit
 
 class CalendarHelper {
-    let calendar = Calendar.current
     
-    func plusMonth(date: Date) -> Date {
-        return calendar.date(byAdding: .month, value: 1, to: date)!
+    let calendar = Calendar.current
+    let dateFormatter = DateFormatter()
+    var calendarDate = Date()
+    
+    func startDayOfTheWeek() -> Int {
+        return calendar.component(.weekday, from: calendarDate - 1)
     }
     
-    func minusMonth(date: Date) -> Date {
-        return calendar.date(byAdding: .month, value: -1, to: date)!
+    func endDate() -> Int {
+        return calendar.range(of: .day, in: .month, for: calendarDate)?.count ?? Int()
     }
     
     func monthString(date: Date) -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.locale = Locale(identifier: "ko_kr")
         dateFormatter.dateFormat = "MM월"
         return dateFormatter.string(from: date)
     }
     
     func yearString(date: Date) -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.locale = Locale(identifier: "ko_kr")
         dateFormatter.dateFormat = "yyyy년"
         return dateFormatter.string(from: date)
-    }
-    
-    func daysInMonth(date: Date) -> Int {
-        let range = calendar.range(of: .day, in: .month, for: date)!
-        return range.count
     }
     
     func dayOfMonth(date: Date) -> Int {
         let components = calendar.dateComponents([.day], from: date)
         return components.day!
-    }
-    
-    func firstOfMonth(date: Date) -> Date {
-        let components = calendar.dateComponents([.year, .month], from: date)
-        return calendar.date(from: components)!
-    }
-    
-    func weekDay(date: Date) -> Int {
-        let components = calendar.dateComponents([.weekday], from: date)
-        return components.weekday! - 1
     }
     
     func addDays(date: Date, days: Int) -> Date {

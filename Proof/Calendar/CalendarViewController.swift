@@ -10,23 +10,20 @@ import UIKit
 
 class CalendarViewController: UIViewController {
     
+    let calendar = Calendar.current
+    var calendarDate = Date()
+    var days = [String]()
+    
     private lazy var yearLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 17.0, weight: .medium)
         return label
     }()
-        
+    
     private lazy var monthLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 30.0, weight: .bold)
         return label
-    }()
-    
-    private lazy var nextMonthButton: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(systemName: "arrow.right"), for: .normal)
-        button.addTarget(self, action: #selector(nextMonthBtnPressed), for: .touchUpInside)
-        return button
     }()
     
     private lazy var previousMonthButton: UIButton = {
@@ -36,8 +33,22 @@ class CalendarViewController: UIViewController {
         return button
     }()
     
-    private lazy var selectedDate = Date()
-    private lazy var totalSquares = [String]()
+    @objc func previousMonthBtnPressed() {
+        calendarDate = calendar.date(byAdding: DateComponents(month: -1), to: calendarDate) ?? Date()
+        updateDays()
+    }
+    
+    private lazy var nextMonthButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "arrow.right"), for: .normal)
+        button.addTarget(self, action: #selector(nextMonthBtnPressed), for: .touchUpInside)
+        return button
+    }()
+    
+    @objc func nextMonthBtnPressed() {
+        calendarDate = calendar.date(byAdding: DateComponents(month: 1), to: calendarDate) ?? Date()
+        updateDays()
+    }
     
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -50,53 +61,47 @@ class CalendarViewController: UIViewController {
         collectionView.dataSource = self
         
         return collectionView
-        
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpNavigationBar()
         setUpLayout()
-        setMonthView()
+        updateDays()
     }
     
-    func setMonthView() {
-        totalSquares.removeAll()
+    func updateDays() {
+        days.removeAll()
+        let startDayOfTheWeek = CalendarHelper().startDayOfTheWeek()
+        let totalDays = startDayOfTheWeek + CalendarHelper().endDate()
         
-        let daysInMonth = CalendarHelper().daysInMonth(date: selectedDate)
-        let firstDayOfMonth = CalendarHelper().firstOfMonth(date: selectedDate)
-        let startingSpaces = CalendarHelper().weekDay(date: firstDayOfMonth)
-        
-        var count: Int = 1
-        
-        while(count <= 42) {
-            if(count <= startingSpaces || count - startingSpaces > daysInMonth) {
-                totalSquares.append("")
-            } else {
-                totalSquares.append(String(count - startingSpaces))
+        for day in Int()..<totalDays {
+            if day < startDayOfTheWeek {
+                days.append(String())
+                continue
             }
-            count += 1
+            days.append("\(day - startDayOfTheWeek + 1)")
         }
-        yearLabel.text = CalendarHelper().yearString(date: selectedDate)
-        monthLabel.text = CalendarHelper().monthString(date: selectedDate)
+        
+        yearLabel.text = CalendarHelper().yearString(date: calendarDate)
+        monthLabel.text = CalendarHelper().monthString(date: calendarDate)
         collectionView.reloadData()
     }
-    
 }
 
 //MARK:  - CollectionView Extensions
 
+
 extension CalendarViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CalendarCell.identifier, for: indexPath) as? CalendarCell
-        cell?.dayLabel.text = totalSquares[indexPath.item]
-        cell?.setUp()
-        
-        return cell ?? UICollectionViewCell()
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CalendarCell.identifier, for: indexPath) as? CalendarCell else { return UICollectionViewCell() }
+        cell.dayLabel.text = days[indexPath.item]
+        cell.setUp()
+        return cell
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        totalSquares.count
+        days.count
     }
 }
 
@@ -130,20 +135,9 @@ private extension CalendarViewController {
     @objc func todayBtnPressed() {
         
     }
-
-    @objc func previousMonthBtnPressed() {
-        selectedDate = CalendarHelper().minusMonth(date: selectedDate)
-        setMonthView()
-    }
     
-    @objc func nextMonthBtnPressed() {
-        selectedDate = CalendarHelper().plusMonth(date: selectedDate)
-        setMonthView()
-    }
+    //MARK:  - Layout
     
-    
-//MARK:  - Layout
-
     func setUpLayout() {
         
         let weekdayStackView = UIStackView()
@@ -169,6 +163,7 @@ private extension CalendarViewController {
             $0.centerX.equalTo(view.safeAreaLayoutGuide)
             $0.top.equalTo(view.safeAreaLayoutGuide).inset(inset)
         }
+        
         monthLabel.snp.makeConstraints {
             $0.centerX.equalTo(view.safeAreaLayoutGuide)
             $0.top.equalTo(yearLabel.snp.bottom).offset(6.0)
@@ -201,7 +196,6 @@ private extension CalendarViewController {
             $0.trailing.equalTo(view.safeAreaLayoutGuide).inset(inset)
             $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(inset)
         }
-        
         
     }
     
