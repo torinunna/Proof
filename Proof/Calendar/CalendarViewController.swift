@@ -89,7 +89,7 @@ class CalendarViewController: UIViewController {
 extension CalendarViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CalendarCell.identifier, for: indexPath) as? CalendarCell
-        cell?.dayOfMonth.text = totalSquares[indexPath.item]
+        cell?.dayLabel.text = totalSquares[indexPath.item]
         cell?.setUp()
         
         return cell ?? UICollectionViewCell()

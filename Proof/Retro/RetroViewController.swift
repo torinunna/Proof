@@ -95,7 +95,7 @@ extension RetroViewController: UICollectionViewDataSource {
         
         let date = totalSquares[indexPath.item]
         
-        cell?.dayOfMonth.text = String(CalendarHelper().dayOfMonth(date: date))
+        cell?.dayLabel.text = String(CalendarHelper().dayOfMonth(date: date))
         
         if(date == selectedDate) {
             cell?.backgroundColor = UIColor.systemGreen

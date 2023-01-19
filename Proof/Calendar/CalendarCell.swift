@@ -12,7 +12,7 @@ class CalendarCell: UICollectionViewCell {
     
     static let identifier = "CalendarCell"
     
-    var dayOfMonth: UILabel = {
+    var dayLabel: UILabel = {
         let label = UILabel()
         label.textColor = .label
         label.textAlignment = .center
@@ -20,8 +20,8 @@ class CalendarCell: UICollectionViewCell {
     }()
     
     func setUp() {
-        addSubview(dayOfMonth)
-        dayOfMonth.snp.makeConstraints {
+        addSubview(dayLabel)
+        dayLabel.snp.makeConstraints {
             $0.center.equalToSuperview()
         }
     }
