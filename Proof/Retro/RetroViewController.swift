@@ -10,6 +10,10 @@ import UIKit
 
 class RetroViewController: UIViewController {
         
+    let calendar = Calendar.current
+    var calendarDate = Date()
+    var days = [Date]()
+    
     private lazy var yearLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 17.0, weight: .medium)
@@ -22,13 +26,6 @@ class RetroViewController: UIViewController {
         return label
     }()
     
-    private lazy var nextWeekButton: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(systemName: "arrow.right"), for: .normal)
-        button.addTarget(self, action: #selector(nextWeekBtnPressed), for: .touchUpInside)
-        return button
-    }()
-    
     private lazy var previousWeekButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "arrow.left"), for: .normal)
@@ -36,9 +33,23 @@ class RetroViewController: UIViewController {
         return button
     }()
     
-    private lazy var selectedDate = Date()
-    private lazy var totalSquares = [Date]()
+    @objc func previousWeekBtnPressed() {
+        calendarDate = calendar.date(byAdding: DateComponents(day: -7), to: calendarDate) ?? Date()
+        setMonthView()
+    }
     
+    private lazy var nextWeekButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "arrow.right"), for: .normal)
+        button.addTarget(self, action: #selector(nextWeekBtnPressed), for: .touchUpInside)
+        return button
+    }()
+    
+    @objc func nextWeekBtnPressed() {
+        calendarDate = calendar.date(byAdding: DateComponents(day: +7), to: calendarDate) ?? Date()
+        setMonthView()
+    }
+ 
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 0.5
@@ -71,17 +82,18 @@ class RetroViewController: UIViewController {
     }
     
     func setMonthView() {
-        totalSquares.removeAll()
+        days.removeAll()
         
-        var current = CalendarHelper().sundayForDate(date: selectedDate)
+        var current = CalendarHelper().sundayForDate(date: calendarDate)
         let nextsunday = CalendarHelper().addDays(date: current, days: 7)
         
         while (current < nextsunday) {
-            totalSquares.append(current)
+            days.append(current)
             current = CalendarHelper().addDays(date: current, days: 1)
         }
-        yearLabel.text = CalendarHelper().yearString(date: selectedDate)
-        monthLabel.text = CalendarHelper().monthString(date: selectedDate)
+        
+        yearLabel.text = CalendarHelper().yearString(date: calendarDate)
+        monthLabel.text = CalendarHelper().monthString(date: calendarDate)
         collectionView.reloadData()
     }
     
@@ -93,11 +105,11 @@ extension RetroViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CalendarCell", for: indexPath) as? CalendarCell
         
-        let date = totalSquares[indexPath.item]
+        let date = days[indexPath.item]
         
         cell?.dayLabel.text = String(CalendarHelper().dayOfMonth(date: date))
         
-        if(date == selectedDate) {
+        if(date == calendarDate) {
             cell?.backgroundColor = UIColor.systemGreen
         } else {
             cell?.backgroundColor = UIColor.white
@@ -108,11 +120,11 @@ extension RetroViewController: UICollectionViewDataSource {
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        totalSquares.count
+        days.count
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        selectedDate = totalSquares[indexPath.item]
+        calendarDate = days[indexPath.item]
         collectionView.reloadData()
     }
 }
@@ -158,17 +170,6 @@ private extension RetroViewController {
         navVc.modalPresentationStyle = .fullScreen
         self.present(navVc, animated: true)
     }
-    
-    @objc func previousWeekBtnPressed() {
-        selectedDate = CalendarHelper().addDays(date: selectedDate, days: -7)
-        setMonthView()
-    }
-    
-    @objc func nextWeekBtnPressed() {
-        selectedDate = CalendarHelper().addDays(date: selectedDate, days: 7)
-        setMonthView()
-    }
-    
     
 //MARK:  - Layout
 
