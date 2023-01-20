@@ -43,6 +43,13 @@ class SignInViewController: UIViewController {
         return textField
     }()
     
+    let errorLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 12.0)
+        label.textColor = .systemBlue
+        return label
+    }()
+    
     private lazy var signInButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("로그인", for: .normal)
@@ -82,6 +89,7 @@ private extension SignInViewController {
             Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
                 if let e = error {
                     print(e)
+                    self.errorLabel.text = "아이디 또는 비밀번호가 일치하지않습니다. 다시 입력해주세요."
                 } else {
                     let vc = TabBarController()
                     vc.modalPresentationStyle = .fullScreen
@@ -90,6 +98,7 @@ private extension SignInViewController {
             }
         }
     }
+ 
 
     @objc func signUpBtnPressed() {
         let vc = SignUpViewController()
@@ -101,7 +110,7 @@ private extension SignInViewController {
     
     func setUpLayout() {
         
-        [titleLabel, idTextField, pwTextField, signInButton, signUpButton].forEach { view.addSubview($0) }
+        [titleLabel, idTextField, pwTextField, errorLabel, signInButton, signUpButton].forEach { view.addSubview($0) }
         
         let viewInset: CGFloat = 16.0
         
@@ -123,6 +132,11 @@ private extension SignInViewController {
             $0.top.equalTo(idTextField.snp.bottom).offset(viewInset)
             $0.trailing.equalTo(idTextField.snp.trailing)
             $0.height.equalTo(30.0)
+        }
+        
+        errorLabel.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.top.equalTo(pwTextField.snp.bottom).offset(8.0)
         }
         
         signInButton.snp.makeConstraints {
