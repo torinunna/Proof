@@ -112,10 +112,10 @@ private extension SignInViewController {
         
         [titleLabel, idTextField, pwTextField, errorLabel, signInButton, signUpButton].forEach { view.addSubview($0) }
         
-        let viewInset: CGFloat = 16.0
+        let inset: CGFloat = 16.0
         
         titleLabel.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).inset(viewInset)
+            $0.top.equalTo(view.safeAreaLayoutGuide).inset(50.0)
             $0.centerX.equalToSuperview()
             $0.height.equalTo(50.0)
         }
@@ -129,7 +129,7 @@ private extension SignInViewController {
         
         pwTextField.snp.makeConstraints {
             $0.leading.equalTo(idTextField.snp.leading)
-            $0.top.equalTo(idTextField.snp.bottom).offset(viewInset)
+            $0.top.equalTo(idTextField.snp.bottom).offset(inset)
             $0.trailing.equalTo(idTextField.snp.trailing)
             $0.height.equalTo(30.0)
         }
@@ -148,7 +148,7 @@ private extension SignInViewController {
         
         signUpButton.snp.makeConstraints {
             $0.leading.equalTo(signInButton.snp.leading)
-            $0.top.equalTo(signInButton.snp.bottom).offset(viewInset)
+            $0.top.equalTo(signInButton.snp.bottom).offset(inset)
             $0.trailing.equalTo(signInButton.snp.trailing)
             $0.height.equalTo(40.0)
         }
