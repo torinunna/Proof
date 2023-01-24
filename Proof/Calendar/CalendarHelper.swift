@@ -14,7 +14,7 @@ class CalendarHelper {
     var calendarDate = Date()
     
     func startDayOfTheWeek() -> Int {
-        return calendar.component(.weekday, from: calendarDate - 1)
+        return calendar.component(.weekday, from: calendarDate) - 1
     }
     
     func endDate() -> Int {
