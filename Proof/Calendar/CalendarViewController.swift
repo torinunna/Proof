@@ -56,7 +56,7 @@ class CalendarViewController: UIViewController {
         layout.minimumInteritemSpacing = 0.5
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.register(CalendarCell.self, forCellWithReuseIdentifier: "CalendarCell")
+        collectionView.register(CalendarCell.self, forCellWithReuseIdentifier: CalendarCell.identifier)
         collectionView.delegate = self
         collectionView.dataSource = self
         

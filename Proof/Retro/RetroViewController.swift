@@ -56,7 +56,7 @@ class RetroViewController: UIViewController {
         layout.minimumInteritemSpacing = 0.5
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.register(CalendarCell.self, forCellWithReuseIdentifier: "CalendarCell")
+        collectionView.register(CalendarCell.self, forCellWithReuseIdentifier: CalendarCell.identifier)
         collectionView.delegate = self
         collectionView.dataSource = self
         
@@ -69,7 +69,7 @@ class RetroViewController: UIViewController {
         tableView.separatorStyle = .none
         tableView.dataSource = self
         
-        tableView.register(RetroListCell.self, forCellReuseIdentifier: "RetroListCell")
+        tableView.register(RetroListCell.self, forCellReuseIdentifier: RetroListCell.identifier)
         
         return tableView
     }()
@@ -103,7 +103,7 @@ class RetroViewController: UIViewController {
 
 extension RetroViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CalendarCell", for: indexPath) as? CalendarCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CalendarCell.identifier, for: indexPath) as? CalendarCell
         
         let date = days[indexPath.item]
         
