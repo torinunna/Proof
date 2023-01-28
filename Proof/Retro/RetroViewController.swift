@@ -140,11 +140,11 @@ extension RetroViewController: UICollectionViewDelegateFlowLayout {
 
 extension RetroViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: RetroListCell.identifier, for: indexPath) as? RetroListCell
-        cell?.selectionStyle = .none
-        cell?.setUp()
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: RetroListCell.identifier, for: indexPath) as? RetroListCell else { return UITableViewCell() }
+        cell.selectionStyle = .none
+        cell.setUp()
         
-        return cell ?? UITableViewCell()
+        return cell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
