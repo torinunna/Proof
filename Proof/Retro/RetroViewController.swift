@@ -103,20 +103,19 @@ class RetroViewController: UIViewController {
 
 extension RetroViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CalendarCell.identifier, for: indexPath) as? CalendarCell
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CalendarCell.identifier, for: indexPath) as? CalendarCell else { return UICollectionViewCell() }
         
         let date = days[indexPath.item]
-        
-        cell?.dayLabel.text = String(CalendarHelper().dayOfMonth(date: date))
+        cell.dayLabel.text = String(CalendarHelper().dayOfMonth(date: date))
         
         if(date == calendarDate) {
-            cell?.backgroundColor = UIColor.systemGreen
+            cell.backgroundColor = UIColor.systemGreen
         } else {
-            cell?.backgroundColor = UIColor.white
+            cell.backgroundColor = UIColor.white
         }
-        cell?.setUp()
         
-        return cell ?? UICollectionViewCell()
+        cell.setUp()
+        return cell
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
