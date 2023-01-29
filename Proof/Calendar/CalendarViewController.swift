@@ -11,6 +11,7 @@ import UIKit
 class CalendarViewController: UIViewController {
     
     let calendar = Calendar.current
+    let dateFormatter = DateFormatter()
     var calendarDate = Date()
     var days = [String]()
     
@@ -35,7 +36,7 @@ class CalendarViewController: UIViewController {
     
     @objc func previousMonthBtnPressed() {
         calendarDate = calendar.date(byAdding: DateComponents(month: -1), to: calendarDate) ?? Date()
-        updateDays()
+        updateCalendar()
     }
     
     private lazy var nextMonthButton: UIButton = {
@@ -47,7 +48,7 @@ class CalendarViewController: UIViewController {
     
     @objc func nextMonthBtnPressed() {
         calendarDate = calendar.date(byAdding: DateComponents(month: 1), to: calendarDate) ?? Date()
-        updateDays()
+        updateCalendar()
     }
     
     private lazy var collectionView: UICollectionView = {
@@ -67,30 +68,12 @@ class CalendarViewController: UIViewController {
         super.viewDidLoad()
         setUpNavigationBar()
         setUpLayout()
-        updateDays()
+        updateCalendar()
     }
     
-    func updateDays() {
-        days.removeAll()
-        let startDayOfTheWeek = CalendarHelper().startDayOfTheWeek()
-        let totalDays = startDayOfTheWeek + CalendarHelper().endDate()
-        
-        for day in Int()..<totalDays {
-            if day < startDayOfTheWeek {
-                days.append(String())
-                continue
-            }
-            days.append("\(day - startDayOfTheWeek + 1)")
-        }
-        
-        yearLabel.text = CalendarHelper().yearString(date: calendarDate)
-        monthLabel.text = CalendarHelper().monthString(date: calendarDate)
-        collectionView.reloadData()
-    }
 }
 
 //MARK:  - CollectionView Extensions
-
 
 extension CalendarViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -135,7 +118,7 @@ private extension CalendarViewController {
     @objc func todayBtnPressed() {
         let components = calendar.dateComponents([.year, .month], from: Date())
         calendarDate = calendar.date(from: components) ?? Date()
-        updateDays()
+        updateCalendar()
     }
     
     //MARK:  - Layout
@@ -199,6 +182,56 @@ private extension CalendarViewController {
             $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(inset)
         }
         
+    }
+    
+}
+
+//MARK:  - Monthly Calendar Methods
+
+private extension CalendarViewController {
+    
+    func startDayOfTheWeek() -> Int {
+        return calendar.component(.weekday, from: calendarDate) - 1
+    }
+    
+    func endDate() -> Int {
+        return calendar.range(of: .day, in: .month, for: calendarDate)?.count ?? Int()
+    }
+    
+    func updateCalendar() {
+        updateTitle()
+        updateDays()
+    }
+    
+    func updateTitle() {
+        yearLabel.text = yearString(date: calendarDate)
+        monthLabel.text = monthString(date: calendarDate)
+    }
+    
+    func yearString(date: Date) -> String {
+        dateFormatter.dateFormat = "yyyy년"
+        return dateFormatter.string(from: date)
+    }
+    
+    func monthString(date: Date) -> String {
+        dateFormatter.dateFormat = "MM월"
+        return dateFormatter.string(from: date)
+    }
+    
+    func updateDays() {
+        days.removeAll()
+        let startDayOfTheWeek = startDayOfTheWeek()
+        let totalDays = startDayOfTheWeek + endDate()
+        
+        for day in Int()..<totalDays {
+            if day < startDayOfTheWeek {
+                days.append(String())
+                continue
+            }
+            days.append("\(day - startDayOfTheWeek + 1)")
+        }
+        
+        collectionView.reloadData()
     }
     
 }

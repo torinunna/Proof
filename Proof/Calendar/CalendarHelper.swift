@@ -11,15 +11,6 @@ class CalendarHelper {
     
     let calendar = Calendar.current
     let dateFormatter = DateFormatter()
-    var calendarDate = Date()
-    
-    func startDayOfTheWeek() -> Int {
-        return calendar.component(.weekday, from: calendarDate) - 1
-    }
-    
-    func endDate() -> Int {
-        return calendar.range(of: .day, in: .month, for: calendarDate)?.count ?? Int()
-    }
     
     func monthString(date: Date) -> String {
         dateFormatter.dateFormat = "MM월"
