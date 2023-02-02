@@ -14,15 +14,9 @@ class RetroViewController: UIViewController {
     var calendarDate = Date()
     var days = [Date]()
     
-    private lazy var yearLabel: UILabel = {
+    private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 17.0, weight: .medium)
-        return label
-    }()
-    
-    private lazy var monthLabel: UILabel = {
-        let label = UILabel()
-        label.font = .systemFont(ofSize: 30.0, weight: .bold)
+        label.font = .systemFont(ofSize: 18.0, weight: .medium)
         return label
     }()
     
@@ -92,8 +86,7 @@ class RetroViewController: UIViewController {
             current = CalendarHelper().addDays(date: current, days: 1)
         }
         
-        yearLabel.text = CalendarHelper().yearString(date: calendarDate)
-        monthLabel.text = CalendarHelper().monthString(date: calendarDate)
+        titleLabel.text = CalendarHelper().yearString(date: calendarDate) + " " + CalendarHelper().monthString(date: calendarDate)
         collectionView.reloadData()
     }
     
@@ -188,37 +181,33 @@ private extension RetroViewController {
             weekdayStackView.addArrangedSubview(label)
         }
         
-        [previousWeekButton, yearLabel, monthLabel, nextWeekButton, weekdayStackView, collectionView, tableView].forEach { view.addSubview($0) }
+        [previousWeekButton, titleLabel, nextWeekButton, weekdayStackView, collectionView, tableView].forEach { view.addSubview($0) }
         
         let inset: CGFloat = 15.0
         let buttonWidth: CGFloat = 25.0
         
-        yearLabel.snp.makeConstraints {
+        titleLabel.snp.makeConstraints {
             $0.centerX.equalTo(view.safeAreaLayoutGuide)
             $0.top.equalTo(view.safeAreaLayoutGuide).inset(inset)
         }
-        monthLabel.snp.makeConstraints {
-            $0.centerX.equalTo(view.safeAreaLayoutGuide)
-            $0.top.equalTo(yearLabel.snp.bottom).offset(6.0)
-        }
         
         previousWeekButton.snp.makeConstraints {
-            $0.trailing.equalTo(monthLabel.snp.leading).offset(-100.0)
-            $0.centerY.equalTo(monthLabel.snp.centerY)
+            $0.trailing.equalTo(titleLabel.snp.leading).offset(-100.0)
+            $0.centerY.equalTo(titleLabel.snp.centerY)
             $0.width.equalTo(buttonWidth)
             $0.height.equalTo(buttonWidth)
         }
         
         nextWeekButton.snp.makeConstraints {
-            $0.leading.equalTo(monthLabel.snp.trailing).offset(100.0)
-            $0.centerY.equalTo(monthLabel.snp.centerY)
+            $0.leading.equalTo(titleLabel.snp.trailing).offset(100.0)
+            $0.centerY.equalTo(titleLabel.snp.centerY)
             $0.width.equalTo(buttonWidth)
             $0.height.equalTo(buttonWidth)
         }
         
         weekdayStackView.snp.makeConstraints {
             $0.leading.equalTo(view.safeAreaLayoutGuide).inset(inset)
-            $0.top.equalTo(monthLabel.snp.bottom).offset(inset)
+            $0.top.equalTo(titleLabel.snp.bottom).offset(10.0)
             $0.trailing.equalTo(view.safeAreaLayoutGuide).inset(inset)
             $0.height.equalTo(50.0)
         }
