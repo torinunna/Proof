@@ -5,15 +5,12 @@
 //  Created by YUJIN KWON on 2022/11/07.
 //
 
-import Firebase
 import UIKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        
-        FirebaseApp.configure()
         
         return true
     }
