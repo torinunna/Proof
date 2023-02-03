@@ -24,7 +24,7 @@ class AddRetroViewController: UIViewController {
 
     private var retroDate: Date?
     
-    let fontSize: CGFloat = 23.0
+    let fontSize: CGFloat = 20.0
     
     private lazy var dateLabel: UILabel = {
         let label = UILabel()
@@ -197,75 +197,73 @@ private extension AddRetroViewController {
 
         [dateLabel, dateTextField, likedLabel, likedTextView, learnedLabel, learnedTextView, lackedLabel, lackedTextView, longedForLabel, longedForTextView].forEach { contentView.addSubview($0) }
     
-        let inset: CGFloat = 15.0
+        let inset: CGFloat = 20.0
+        let offset: CGFloat = 15.0
+        let secondOffset: CGFloat = 10.0
         
         dateLabel.snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(30)
+            $0.leading.equalToSuperview().inset(30.0)
             $0.top.equalToSuperview().inset(inset)
-            $0.width.equalTo(100)
-            $0.height.equalTo(30.0)
+            $0.width.equalTo(60.0)
         }
         
         dateTextField.snp.makeConstraints {
-            $0.leading.equalTo(dateLabel.snp.trailing).offset(5.0)
-            $0.top.equalTo(dateLabel.snp.top)
-            $0.trailing.equalToSuperview().inset(inset)
-            $0.height.equalTo(30.0)
+            $0.leading.equalTo(dateLabel.snp.trailing)
+            $0.centerY.equalTo(dateLabel.snp.centerY)
+            $0.trailing.equalToSuperview().inset(30.0)
+            $0.height.equalTo(25.0)
         }
         
         likedLabel.snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(20)
-            $0.top.equalTo(dateLabel.snp.bottom).offset(inset)
+            $0.leading.equalToSuperview().inset(inset)
+            $0.top.equalTo(dateLabel.snp.bottom).offset(offset)
             $0.trailing.equalToSuperview().inset(inset)
-            $0.height.equalTo(30.0)
+            
         }
 
         likedTextView.snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(inset)
-            $0.top.equalTo(likedLabel.snp.bottom).offset(inset)
-            $0.trailing.equalToSuperview().inset(inset)
+            $0.leading.equalTo(likedLabel.snp.leading)
+            $0.top.equalTo(likedLabel.snp.bottom).offset(secondOffset)
+            $0.trailing.equalTo(likedLabel.snp.trailing)
             $0.height.equalTo(200.0)
         }
 
         learnedLabel.snp.makeConstraints {
             $0.leading.equalTo(likedLabel.snp.leading)
-            $0.top.equalTo(likedTextView.snp.bottom).offset(20.0)
-            $0.trailing.equalToSuperview().inset(inset)
-            $0.height.equalTo(30.0)
+            $0.top.equalTo(likedTextView.snp.bottom).offset(offset)
+            $0.trailing.equalTo(likedLabel.snp.trailing)
         }
 
         learnedTextView.snp.makeConstraints {
-            $0.leading.equalTo(likedTextView.snp.leading)
-            $0.top.equalTo(learnedLabel.snp.bottom).offset(inset)
-            $0.trailing.equalToSuperview().inset(inset)
+            $0.leading.equalTo(likedLabel.snp.leading)
+            $0.top.equalTo(learnedLabel.snp.bottom).offset(secondOffset)
+            $0.trailing.equalTo(likedLabel.snp.trailing)
             $0.height.equalTo(200.0)
         }
 
         lackedLabel.snp.makeConstraints {
             $0.leading.equalTo(likedLabel.snp.leading)
-            $0.top.equalTo(learnedTextView.snp.bottom).offset(20.0)
-            $0.trailing.equalToSuperview().inset(inset)
-            $0.height.equalTo(30.0)
+            $0.top.equalTo(learnedTextView.snp.bottom).offset(offset)
+            $0.trailing.equalTo(likedLabel.snp.trailing)
         }
 
         lackedTextView.snp.makeConstraints {
-            $0.leading.equalTo(likedTextView.snp.leading)
-            $0.top.equalTo(lackedLabel.snp.bottom).offset(inset)
-            $0.trailing.equalToSuperview().inset(inset)
+            $0.leading.equalTo(likedLabel.snp.leading)
+            $0.top.equalTo(lackedLabel.snp.bottom).offset(secondOffset)
+            $0.trailing.equalTo(likedLabel.snp.trailing)
             $0.height.equalTo(200.0)
         }
 
         longedForLabel.snp.makeConstraints {
             $0.leading.equalTo(likedLabel.snp.leading)
-            $0.top.equalTo(lackedTextView.snp.bottom).offset(20.0)
-            $0.trailing.equalToSuperview().inset(inset)
-            $0.height.equalTo(30.0)
+            $0.top.equalTo(lackedTextView.snp.bottom).offset(offset)
+            $0.trailing.equalTo(likedLabel.snp.trailing)
         }
 
         longedForTextView.snp.makeConstraints {
-            $0.leading.equalTo(likedTextView.snp.leading)
-            $0.top.equalTo(longedForLabel.snp.bottom).offset(inset)
-            $0.trailing.equalToSuperview().inset(inset)
+            $0.leading.equalTo(likedLabel.snp.leading)
+            $0.top.equalTo(longedForLabel.snp.bottom).offset(secondOffset)
+            $0.trailing.equalTo(likedLabel.snp.trailing)
             $0.bottom.equalToSuperview().inset(inset)
             $0.height.equalTo(200.0)
         }
