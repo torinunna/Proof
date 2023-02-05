@@ -18,7 +18,6 @@
 		86123C562918F1AC0004748F /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86123C552918F1AC0004748F /* SettingViewController.swift */; };
 		86123C582918F1F60004748F /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86123C572918F1F60004748F /* CalendarViewController.swift */; };
 		86123C5A2918F2010004748F /* RetroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86123C592918F2010004748F /* RetroViewController.swift */; };
-		86123C612918FD1F0004748F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 86123C602918FD1F0004748F /* GoogleService-Info.plist */; };
 		86369C74292B29740089D70D /* PopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86369C73292B29740089D70D /* PopUpViewController.swift */; };
 		867ACE31292129BC00F71476 /* RetroListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 867ACE30292129BC00F71476 /* RetroListCell.swift */; };
 		867ACE332921355A00F71476 /* AddRetroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 867ACE322921355A00F71476 /* AddRetroViewController.swift */; };
@@ -38,7 +37,6 @@
 		86123C552918F1AC0004748F /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		86123C572918F1F60004748F /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		86123C592918F2010004748F /* RetroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetroViewController.swift; sourceTree = "<group>"; };
-		86123C602918FD1F0004748F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		86369C73292B29740089D70D /* PopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpViewController.swift; sourceTree = "<group>"; };
 		867ACE30292129BC00F71476 /* RetroListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetroListCell.swift; sourceTree = "<group>"; };
 		867ACE322921355A00F71476 /* AddRetroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRetroViewController.swift; sourceTree = "<group>"; };
@@ -86,7 +84,6 @@
 				86123C472918E4500004748F /* Assets.xcassets */,
 				86123C492918E4500004748F /* LaunchScreen.storyboard */,
 				86123C4C2918E4500004748F /* Info.plist */,
-				86123C602918FD1F0004748F /* GoogleService-Info.plist */,
 			);
 			path = Proof;
 			sourceTree = "<group>";
@@ -186,7 +183,6 @@
 			files = (
 				86123C4B2918E4500004748F /* LaunchScreen.storyboard in Resources */,
 				86123C482918E4500004748F /* Assets.xcassets in Resources */,
-				86123C612918FD1F0004748F /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
