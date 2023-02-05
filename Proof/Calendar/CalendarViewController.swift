@@ -29,7 +29,7 @@ class CalendarViewController: UIViewController {
     
     private lazy var previousMonthButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(systemName: "arrow.left"), for: .normal)
+        button.setImage(UIImage(systemName: "chevron.left"), for: .normal)
         button.addTarget(self, action: #selector(previousMonthBtnPressed), for: .touchUpInside)
         return button
     }()
@@ -41,7 +41,7 @@ class CalendarViewController: UIViewController {
     
     private lazy var nextMonthButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(systemName: "arrow.right"), for: .normal)
+        button.setImage(UIImage(systemName: "chevron.right"), for: .normal)
         button.addTarget(self, action: #selector(nextMonthBtnPressed), for: .touchUpInside)
         return button
     }()

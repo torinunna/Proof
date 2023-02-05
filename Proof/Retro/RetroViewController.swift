@@ -22,7 +22,7 @@ class RetroViewController: UIViewController {
     
     private lazy var previousWeekButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(systemName: "arrow.left"), for: .normal)
+        button.setImage(UIImage(systemName: "chevron.left"), for: .normal)
         button.addTarget(self, action: #selector(previousWeekBtnPressed), for: .touchUpInside)
         return button
     }()
@@ -34,7 +34,7 @@ class RetroViewController: UIViewController {
     
     private lazy var nextWeekButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(systemName: "arrow.right"), for: .normal)
+        button.setImage(UIImage(systemName: "chevron.right"), for: .normal)
         button.addTarget(self, action: #selector(nextWeekBtnPressed), for: .touchUpInside)
         return button
     }()
