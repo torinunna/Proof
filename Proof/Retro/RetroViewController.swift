@@ -16,7 +16,7 @@ class RetroViewController: UIViewController {
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 18.0, weight: .medium)
+        label.font = .systemFont(ofSize: 17.0, weight: .semibold)
         return label
     }()
     
@@ -177,7 +177,7 @@ private extension RetroViewController {
             let label = UILabel()
             label.text = dayOfTheWeek[i]
             label.textAlignment = .center
-            label.font = .systemFont(ofSize: 20.0, weight: .semibold)
+            label.font = .systemFont(ofSize: 17.0, weight: .medium)
             weekdayStackView.addArrangedSubview(label)
         }
         

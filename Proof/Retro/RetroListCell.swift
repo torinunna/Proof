@@ -15,7 +15,7 @@ class RetroListCell: UITableViewCell {
     private lazy var categorylabel:  UILabel = {
         let label = UILabel()
         label.text = "Daily"
-        label.font = .systemFont(ofSize: 20.0, weight: .bold)
+        label.font = .systemFont(ofSize: 17.0, weight: .semibold)
         return label
     }()
     
@@ -28,42 +28,42 @@ class RetroListCell: UITableViewCell {
     private lazy var likedLabel: UILabel = {
         let label = UILabel()
         label.text = "Liked"
-        label.font = .systemFont(ofSize: 15.0, weight: .semibold)
+        label.font = .systemFont(ofSize: 15.0, weight: .medium)
         return label
     }()
     
     private lazy var likedContents: UILabel = {
         let label = UILabel()
         label.text = "오늘 목표 달성"
-        label.font = .systemFont(ofSize: 15.0, weight: .medium)
+        label.font = .systemFont(ofSize: 15.0)
         return label
     }()
 
     private lazy var learnedLabel: UILabel = {
         let label = UILabel()
         label.text = "Learned"
-        label.font = .systemFont(ofSize: 15.0, weight: .semibold)
+        label.font = .systemFont(ofSize: 15.0, weight: .medium)
         return label
     }()
     
     private lazy var learnedContents: UILabel = {
         let label = UILabel()
         label.text = "캘린더 구현"
-        label.font = .systemFont(ofSize: 15.0, weight: .medium)
+        label.font = .systemFont(ofSize: 15.0)
         return label
     }()
     
     private lazy var lackedLabel: UILabel = {
         let label = UILabel()
         label.text = "Lacked"
-        label.font = .systemFont(ofSize: 15.0, weight: .semibold)
+        label.font = .systemFont(ofSize: 15.0, weight: .medium)
         return label
     }()
     
     private lazy var lackedContents: UILabel = {
         let label = UILabel()
         label.text = "버튼스택뷰"
-        label.font = .systemFont(ofSize: 15.0, weight: .medium)
+        label.font = .systemFont(ofSize: 15.0)
         return label
     }()
     
@@ -71,14 +71,14 @@ class RetroListCell: UITableViewCell {
     private lazy var longedForLabel: UILabel = {
         let label = UILabel()
         label.text = "Longed For"
-        label.font = .systemFont(ofSize: 15.0, weight: .semibold)
+        label.font = .systemFont(ofSize: 15.0, weight: .medium)
         return label
     }()
     
     private lazy var longedForContents: UILabel = {
         let label = UILabel()
         label.text = "내일 목표 달성"
-        label.font = .systemFont(ofSize: 15.0, weight: .medium)
+        label.font = .systemFont(ofSize: 15.0)
         return label
     }()
     

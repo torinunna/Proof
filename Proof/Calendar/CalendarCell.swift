@@ -15,6 +15,7 @@ class CalendarCell: UICollectionViewCell {
     var dayLabel: UILabel = {
         let label = UILabel()
         label.textColor = .label
+        label.font = .systemFont(ofSize: 16.0)
         label.textAlignment = .center
         return label
     }()

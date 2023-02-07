@@ -24,12 +24,12 @@ class AddRetroViewController: UIViewController {
 
     private var retroDate: Date?
     
-    let fontSize: CGFloat = 20.0
+    let fontSize: CGFloat = 17.0
     
     private lazy var dateLabel: UILabel = {
         let label = UILabel()
         label.text = "날짜"
-        label.font = .systemFont(ofSize: fontSize, weight: .bold)
+        label.font = .systemFont(ofSize: fontSize, weight: .semibold)
         return label
     }()
     
@@ -43,7 +43,7 @@ class AddRetroViewController: UIViewController {
     private lazy var likedLabel: UILabel = {
         let label = UILabel()
         label.text = "Liked"
-        label.font = .systemFont(ofSize: fontSize, weight: .bold)
+        label.font = .systemFont(ofSize: fontSize, weight: .semibold)
         return label
     }()
     
@@ -62,7 +62,7 @@ class AddRetroViewController: UIViewController {
     private lazy var learnedLabel: UILabel = {
         let label = UILabel()
         label.text = "Learned"
-        label.font = .systemFont(ofSize: fontSize, weight: .bold)
+        label.font = .systemFont(ofSize: fontSize, weight: .semibold)
         return label
     }()
     
@@ -81,7 +81,7 @@ class AddRetroViewController: UIViewController {
     private lazy var lackedLabel: UILabel = {
         let label = UILabel()
         label.text = "Lacked"
-        label.font = .systemFont(ofSize: fontSize, weight: .bold)
+        label.font = .systemFont(ofSize: fontSize, weight: .semibold)
         return label
     }()
     
@@ -100,7 +100,7 @@ class AddRetroViewController: UIViewController {
     private lazy var longedForLabel: UILabel = {
         let label = UILabel()
         label.text = "Longed For"
-        label.font = .systemFont(ofSize: fontSize, weight: .bold)
+        label.font = .systemFont(ofSize: fontSize, weight: .semibold)
         return label
     }()
     

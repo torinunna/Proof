@@ -17,13 +17,13 @@ class CalendarViewController: UIViewController {
     
     private lazy var yearLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 17.0, weight: .medium)
+        label.font = .systemFont(ofSize: 15.0, weight: .medium)
         return label
     }()
     
     private lazy var monthLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 30.0, weight: .bold)
+        label.font = .systemFont(ofSize: 20.0, weight: .semibold)
         return label
     }()
     
@@ -135,7 +135,7 @@ private extension CalendarViewController {
             let label = UILabel()
             label.text = dayOfTheWeek[i]
             label.textAlignment = .center
-            label.font = .systemFont(ofSize: 20.0, weight: .semibold)
+            label.font = .systemFont(ofSize: 17.0, weight: .medium)
             weekdayStackView.addArrangedSubview(label)
         }
         
