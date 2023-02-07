@@ -53,8 +53,8 @@ class CalendarViewController: UIViewController {
     
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.minimumLineSpacing = 0.5
-        layout.minimumInteritemSpacing = 0.5
+        layout.minimumLineSpacing = .zero
+        layout.minimumInteritemSpacing = .zero
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(CalendarCell.self, forCellWithReuseIdentifier: CalendarCell.identifier)
@@ -90,10 +90,9 @@ extension CalendarViewController: UICollectionViewDataSource {
 
 extension CalendarViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width: CGFloat = (collectionView.frame.width - 2) / 8
-        let height: CGFloat = (collectionView.frame.height - 2) / 8
+        let width: CGFloat = (collectionView.frame.width - 2) / 7
         
-        return CGSize(width: width, height: height)
+        return CGSize(width: width, height: width)
     }
 }
 
@@ -126,7 +125,6 @@ private extension CalendarViewController {
     func setUpLayout() {
         
         let weekdayStackView = UIStackView()
-        weekdayStackView.spacing = 4.0
         weekdayStackView.distribution = .fillEqually
         
         let dayOfTheWeek = ["일", "월", "화", "수", "목", "금", "토"]
