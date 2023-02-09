@@ -24,6 +24,7 @@ class RetroViewController: UIViewController {
         let button = UIButton()
         button.setImage(UIImage(systemName: "chevron.left"), for: .normal)
         button.addTarget(self, action: #selector(previousWeekBtnPressed), for: .touchUpInside)
+        button.tintColor = .black
         return button
     }()
     
@@ -36,6 +37,7 @@ class RetroViewController: UIViewController {
         let button = UIButton()
         button.setImage(UIImage(systemName: "chevron.right"), for: .normal)
         button.addTarget(self, action: #selector(nextWeekBtnPressed), for: .touchUpInside)
+        button.tintColor = .black
         return button
     }()
     
