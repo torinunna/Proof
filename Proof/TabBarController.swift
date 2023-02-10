@@ -14,19 +14,19 @@ final class TabBarController: UITabBarController {
         
         let retroViewController = UINavigationController(rootViewController: RetroViewController())
         retroViewController.tabBarItem = UITabBarItem(
-            title: nil,
+            title: "Home",
             image: UIImage(systemName: "house"),
             selectedImage: UIImage(systemName: "house.fill"))
         
         let calendarViewController = UINavigationController(rootViewController: CalendarViewController())
         calendarViewController.tabBarItem = UITabBarItem(
-            title: nil,
+            title: "Monthly",
             image: UIImage(systemName: "calendar"),
             selectedImage: UIImage(systemName: "calendar"))
         
         let settingViewController = UINavigationController(rootViewController: SettingViewController())
         settingViewController.tabBarItem = UITabBarItem(
-            title: nil,
+            title: "MY",
             image: UIImage(systemName: "person"),
             selectedImage: UIImage(systemName: "person.fill"))
         
