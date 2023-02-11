@@ -10,10 +10,9 @@ import UIKit
 
 class CalendarViewController: UIViewController {
     
+    var selectedDate = Date()
+    var totalSquares = [String]()
     let calendar = Calendar.current
-    let dateFormatter = DateFormatter()
-    var calendarDate = Date()
-    var days = [String]()
     
     private lazy var yearLabel: UILabel = {
         let label = UILabel()
@@ -36,8 +35,8 @@ class CalendarViewController: UIViewController {
     }()
     
     @objc func previousMonthBtnPressed() {
-        calendarDate = calendar.date(byAdding: DateComponents(month: -1), to: calendarDate) ?? Date()
-        updateCalendar()
+        selectedDate = calendar.date(byAdding: DateComponents(month: -1), to: selectedDate) ?? Date()
+        setMonthView()
     }
     
     private lazy var nextMonthButton: UIButton = {
@@ -49,9 +48,15 @@ class CalendarViewController: UIViewController {
     }()
     
     @objc func nextMonthBtnPressed() {
-        calendarDate = calendar.date(byAdding: DateComponents(month: 1), to: calendarDate) ?? Date()
-        updateCalendar()
+        selectedDate = calendar.date(byAdding: DateComponents(month: 1), to: selectedDate) ?? Date()
+        setMonthView()
     }
+    
+    private lazy var weekdayStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.distribution = .fillEqually
+        return stackView
+    }()
     
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -70,35 +75,78 @@ class CalendarViewController: UIViewController {
         super.viewDidLoad()
         setUpNavigationBar()
         setUpLayout()
-        updateCalendar()
+        setUpStackView()
+        setMonthView()
     }
     
+    func setUpStackView() {
+        let weekdays = ["일", "월", "화", "수", "목", "금", "토"]
+        
+        for i in 0..<7 {
+            let label = UILabel()
+            label.text = weekdays[i]
+            label.textAlignment = .center
+            label.font = .systemFont(ofSize: 17.0, weight: .medium)
+            weekdayStackView.addArrangedSubview(label)
+        }
+    }
+
+    func setMonthView() {
+        totalSquares.removeAll()
+        
+        let daysInMonth = CalendarHelper().daysInMonth(date: selectedDate)
+        let firstDayOfMonth = CalendarHelper().firstOfMonth(date: selectedDate)
+        let startingSpaces = CalendarHelper().weekDay(date: firstDayOfMonth)
+        
+        var count: Int = 1
+        
+        while count <= 42 {
+            if count <= startingSpaces || count - startingSpaces > daysInMonth {
+                totalSquares.append("")
+            } else {
+                totalSquares.append(String(count - startingSpaces))
+            }
+            count += 1
+        }
+ 
+        yearLabel.text = CalendarHelper().yearString(date: selectedDate)
+        monthLabel.text = CalendarHelper().monthString(date: selectedDate)
+        collectionView.reloadData()
+    }
+
 }
 
-//MARK:  - CollectionView Extensions
+//MARK:  - CollectionView DataSource
 
 extension CalendarViewController: UICollectionViewDataSource {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return totalSquares.count
+    }
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CalendarCell.identifier, for: indexPath) as? CalendarCell else { return UICollectionViewCell() }
-        cell.dayLabel.text = days[indexPath.item]
         cell.setUp()
+        cell.dayLabel.text = totalSquares[indexPath.item]
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        days.count
-    }
 }
+
+//MARK:  - CollectionView Delegate
 
 extension CalendarViewController: UICollectionViewDelegateFlowLayout {
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width: CGFloat = (collectionView.frame.width - 2) / 7
-        
-        return CGSize(width: width, height: width)
+        let width: CGFloat = (collectionView.frame.size.width - 2) / 7
+        let height: CGFloat = (collectionView.frame.size.height - 2) / 8
+
+        return CGSize(width: width, height: height)
     }
+    
 }
 
-//MARK:  - Private Extension
+//MARK:  - NavigationBar
 
 private extension CalendarViewController {
     
@@ -118,28 +166,14 @@ private extension CalendarViewController {
     
     @objc func todayBtnPressed() {
         let components = calendar.dateComponents([.year, .month], from: Date())
-        calendarDate = calendar.date(from: components) ?? Date()
-        updateCalendar()
+        selectedDate = calendar.date(from: components) ?? Date()
+        setMonthView()
     }
     
-    //MARK:  - Layout
+//MARK:  - Layout
     
     func setUpLayout() {
-        
-        let weekdayStackView = UIStackView()
-        weekdayStackView.distribution = .fillEqually
-        
-        let dayOfTheWeek = ["일", "월", "화", "수", "목", "금", "토"]
-        
-        for i in 0..<7 {
-            let label = UILabel()
-            label.text = dayOfTheWeek[i]
-            label.textAlignment = .center
-            label.font = .systemFont(ofSize: 17.0, weight: .medium)
-            weekdayStackView.addArrangedSubview(label)
-        }
-        
-        [previousMonthButton, yearLabel, monthLabel, nextMonthButton, weekdayStackView, collectionView].forEach { view.addSubview($0) }
+        [yearLabel, monthLabel, previousMonthButton, nextMonthButton, weekdayStackView, collectionView].forEach { view.addSubview($0) }
         
         let inset: CGFloat = 15.0
         let buttonWidth: CGFloat = 25.0
@@ -182,56 +216,6 @@ private extension CalendarViewController {
             $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(inset)
         }
         
-    }
-    
-}
-
-//MARK:  - Monthly Calendar Methods
-
-private extension CalendarViewController {
-    
-    func startDayOfTheWeek() -> Int {
-        return calendar.component(.weekday, from: calendarDate) - 1
-    }
-    
-    func endDate() -> Int {
-        return calendar.range(of: .day, in: .month, for: calendarDate)?.count ?? Int()
-    }
-    
-    func updateCalendar() {
-        updateTitle()
-        updateDays()
-    }
-    
-    func updateTitle() {
-        yearLabel.text = yearString(date: calendarDate)
-        monthLabel.text = monthString(date: calendarDate)
-    }
-    
-    func yearString(date: Date) -> String {
-        dateFormatter.dateFormat = "yyyy년"
-        return dateFormatter.string(from: date)
-    }
-    
-    func monthString(date: Date) -> String {
-        dateFormatter.dateFormat = "MM월"
-        return dateFormatter.string(from: date)
-    }
-    
-    func updateDays() {
-        days.removeAll()
-        let startDayOfTheWeek = startDayOfTheWeek()
-        let totalDays = startDayOfTheWeek + endDate()
-        
-        for day in Int()..<totalDays {
-            if day < startDayOfTheWeek {
-                days.append(String())
-                continue
-            }
-            days.append("\(day - startDayOfTheWeek + 1)")
-        }
-        
-        collectionView.reloadData()
     }
     
 }

@@ -21,6 +21,24 @@ class CalendarHelper {
         dateFormatter.dateFormat = "yyyy년"
         return dateFormatter.string(from: date)
     }
+
+//MARK:  - Monthly
+    
+    func daysInMonth(date: Date) -> Int {
+        return calendar.range(of: .day, in: .month, for: date)?.count ?? Int()
+    }
+    
+    func firstOfMonth(date: Date) -> Date {
+        let components = calendar.dateComponents([.year, .month], from: date)
+        return calendar.date(from: components) ?? Date()
+    }
+    
+    func weekDay(date: Date) -> Int {
+        return calendar.component(.weekday, from: date) - 1
+    }
+    
+    
+    //MARK:  - Weekly
     
     func dayOfMonth(date: Date) -> Int {
         let components = calendar.dateComponents([.day], from: date)
