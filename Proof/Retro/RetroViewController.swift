@@ -45,7 +45,13 @@ class RetroViewController: UIViewController {
         selectedDate = calendar.date(byAdding: DateComponents(day: +7), to: selectedDate) ?? Date()
         setWeekView()
     }
- 
+    
+    private lazy var weekdayStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.distribution = .fillEqually
+        return stackView
+    }()
+    
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 0.5
@@ -74,7 +80,20 @@ class RetroViewController: UIViewController {
         super.viewDidLoad()
         setUpNavigationBar()
         setUpLayout()
+        setUpStackView()
         setWeekView()
+    }
+    
+    func setUpStackView() {
+        let weekdays = ["일", "월", "화", "수", "목", "금", "토"]
+        
+        for i in 0..<7 {
+            let label = UILabel()
+            label.text = weekdays[i]
+            label.textAlignment = .center
+            label.font = .systemFont(ofSize: 17.0, weight: .medium)
+            weekdayStackView.addArrangedSubview(label)
+        }
     }
     
     func setWeekView() {
@@ -167,21 +186,6 @@ private extension RetroViewController {
 //MARK:  - Layout
 
     func setUpLayout() {
-        
-        let weekdayStackView = UIStackView()
-        weekdayStackView.spacing = 4.0
-        weekdayStackView.distribution = .fillEqually
-        
-        let dayOfTheWeek = ["일", "월", "화", "수", "목", "금", "토"]
-        
-        for i in 0..<7 {
-            let label = UILabel()
-            label.text = dayOfTheWeek[i]
-            label.textAlignment = .center
-            label.font = .systemFont(ofSize: 17.0, weight: .medium)
-            weekdayStackView.addArrangedSubview(label)
-        }
-        
         [previousWeekButton, titleLabel, nextWeekButton, weekdayStackView, collectionView, tableView].forEach { view.addSubview($0) }
         
         let inset: CGFloat = 15.0
