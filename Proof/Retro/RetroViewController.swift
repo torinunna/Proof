@@ -11,8 +11,8 @@ import UIKit
 class RetroViewController: UIViewController {
         
     let calendar = Calendar.current
-    var calendarDate = Date()
-    var days = [Date]()
+    var selectedDate = Date()
+    var totalSquares = [Date]()
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
@@ -29,8 +29,8 @@ class RetroViewController: UIViewController {
     }()
     
     @objc func previousWeekBtnPressed() {
-        calendarDate = calendar.date(byAdding: DateComponents(day: -7), to: calendarDate) ?? Date()
-        setMonthView()
+        selectedDate = calendar.date(byAdding: DateComponents(day: -7), to: selectedDate) ?? Date()
+        setWeekView()
     }
     
     private lazy var nextWeekButton: UIButton = {
@@ -42,8 +42,8 @@ class RetroViewController: UIViewController {
     }()
     
     @objc func nextWeekBtnPressed() {
-        calendarDate = calendar.date(byAdding: DateComponents(day: +7), to: calendarDate) ?? Date()
-        setMonthView()
+        selectedDate = calendar.date(byAdding: DateComponents(day: +7), to: selectedDate) ?? Date()
+        setWeekView()
     }
  
     private lazy var collectionView: UICollectionView = {
@@ -74,21 +74,21 @@ class RetroViewController: UIViewController {
         super.viewDidLoad()
         setUpNavigationBar()
         setUpLayout()
-        setMonthView()
+        setWeekView()
     }
     
-    func setMonthView() {
-        days.removeAll()
+    func setWeekView() {
+        totalSquares.removeAll()
         
-        var current = CalendarHelper().sundayForDate(date: calendarDate)
+        var current = CalendarHelper().sundayForDate(date: selectedDate)
         let nextsunday = CalendarHelper().addDays(date: current, days: 7)
         
         while (current < nextsunday) {
-            days.append(current)
+            totalSquares.append(current)
             current = CalendarHelper().addDays(date: current, days: 1)
         }
         
-        titleLabel.text = CalendarHelper().yearString(date: calendarDate) + " " + CalendarHelper().monthString(date: calendarDate)
+        titleLabel.text = CalendarHelper().yearString(date: selectedDate) + " " + CalendarHelper().monthString(date: selectedDate)
         collectionView.reloadData()
     }
     
@@ -100,25 +100,25 @@ extension RetroViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CalendarCell.identifier, for: indexPath) as? CalendarCell else { return UICollectionViewCell() }
         
-        let date = days[indexPath.item]
+        let date = totalSquares[indexPath.item]
         cell.dayLabel.text = String(CalendarHelper().dayOfMonth(date: date))
         
-        if(date == calendarDate) {
+        if(date == selectedDate) {
             cell.backgroundColor = UIColor.systemGreen
         } else {
             cell.backgroundColor = UIColor.white
         }
-        
+
         cell.setUp()
         return cell
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        days.count
+        totalSquares.count
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        calendarDate = days[indexPath.item]
+        selectedDate = totalSquares[indexPath.item]
         collectionView.reloadData()
     }
 }
@@ -126,9 +126,8 @@ extension RetroViewController: UICollectionViewDataSource {
 extension RetroViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width: CGFloat = (collectionView.frame.width - 2) / 8
-        let height = width
         
-        return CGSize(width: width, height: height)
+        return CGSize(width: width, height: width)
     }
 }
 //MARK:  - TableView Extension

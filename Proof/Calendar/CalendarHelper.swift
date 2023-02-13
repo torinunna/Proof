@@ -42,11 +42,11 @@ class CalendarHelper {
     
     func dayOfMonth(date: Date) -> Int {
         let components = calendar.dateComponents([.day], from: date)
-        return components.day!
+        return components.day ?? Int()
     }
     
     func addDays(date: Date, days: Int) -> Date {
-        return calendar.date(byAdding: .day, value: days, to: date)!
+        return calendar.date(byAdding: DateComponents(day: days), to: date) ?? Date()
     }
     
     func sundayForDate(date: Date) -> Date {
@@ -60,6 +60,7 @@ class CalendarHelper {
             }
             current = addDays(date: current, days: -1)
         }
+        
         return current
     }
     
