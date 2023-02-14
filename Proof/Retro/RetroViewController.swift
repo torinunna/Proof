@@ -123,9 +123,11 @@ extension RetroViewController: UICollectionViewDataSource {
         cell.dayLabel.text = String(CalendarHelper().dayOfMonth(date: date))
         
         if(date == selectedDate) {
-            cell.backgroundColor = UIColor.systemGreen
+            cell.backgroundColor = UIColor.black
+            cell.dayLabel.textColor = UIColor.white
         } else {
             cell.backgroundColor = UIColor.white
+            cell.dayLabel.textColor = UIColor.black
         }
 
         cell.setUp()
