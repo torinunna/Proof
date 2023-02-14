@@ -11,11 +11,12 @@ class SettingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUpNavigationcontroller()
+        setUpNavigationBar()
     }
 
-    func setUpNavigationcontroller() {
-        navigationItem.title = "설정"
+    func setUpNavigationBar() {
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.title = "MY"
     }
     
 }
