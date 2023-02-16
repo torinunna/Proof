@@ -87,6 +87,13 @@ class CalendarViewController: UIViewController {
             label.text = weekdays[i]
             label.textAlignment = .center
             label.font = .systemFont(ofSize: 17.0, weight: .medium)
+            
+            if i == 0 {
+                label.textColor = UIColor.red
+            } else {
+                label.textColor = UIColor.black
+            }
+            
             weekdayStackView.addArrangedSubview(label)
         }
     }

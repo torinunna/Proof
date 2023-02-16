@@ -96,8 +96,6 @@ class RetroViewController: UIViewController {
             
             if i == 0 {
                 label.textColor = UIColor.red
-            } else if i == 6 {
-                label.textColor = UIColor.blue
             } else {
                 label.textColor = UIColor.black
             }
