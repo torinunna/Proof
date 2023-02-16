@@ -58,6 +58,7 @@ class RetroViewController: UIViewController {
         layout.minimumInteritemSpacing = 0.5
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.isScrollEnabled = false
         collectionView.register(CalendarCell.self, forCellWithReuseIdentifier: CalendarCell.identifier)
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -92,8 +93,18 @@ class RetroViewController: UIViewController {
             label.text = weekdays[i]
             label.textAlignment = .center
             label.font = .systemFont(ofSize: 17.0, weight: .medium)
+            
+            if i == 0 {
+                label.textColor = UIColor.red
+            } else if i == 6 {
+                label.textColor = UIColor.blue
+            } else {
+                label.textColor = UIColor.black
+            }
+            
             weekdayStackView.addArrangedSubview(label)
         }
+        
     }
     
     func setWeekView() {
@@ -146,10 +157,15 @@ extension RetroViewController: UICollectionViewDataSource {
 
 extension RetroViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width: CGFloat = (collectionView.frame.width - 2) / 8
+        let width: CGFloat = (collectionView.frame.width - 2) / 7
         
         return CGSize(width: width, height: width)
     }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return .zero
+    }
+    
 }
 //MARK:  - TableView Extension
 
