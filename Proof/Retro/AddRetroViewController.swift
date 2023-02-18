@@ -39,7 +39,63 @@ class AddRetroViewController: UIViewController {
         textField.layer.cornerRadius = 10.0
         return textField
     }()
+    
+    private let categoryStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.distribution = .fillEqually
+        stackView.spacing = 8.0
+        return stackView
+    }()
+    
+    private lazy var dailyButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Daily", for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: fontSize, weight: .medium)
+        button.setTitleColor(UIColor.black, for: .normal)
+        button.backgroundColor = .white
+        button.layer.cornerRadius = 10
+        button.layer.borderWidth = 1.0
+        button.addTarget(self, action: #selector(categoryButtonTapped(_:)), for: .touchUpInside)
+        return button
+    }()
 
+    private lazy var weeklyButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Weekly", for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: fontSize, weight: .medium)
+        button.setTitleColor(UIColor.black, for: .normal)
+        button.backgroundColor = .white
+        button.layer.cornerRadius = 10
+        button.layer.borderWidth = 1.0
+        button.addTarget(self, action: #selector(categoryButtonTapped(_:)), for: .touchUpInside)
+        return button
+    }()
+    
+    private lazy var monthlyButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Monthly", for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: fontSize, weight: .medium)
+        button.setTitleColor(UIColor.black, for: .normal)
+        button.backgroundColor = .white
+        button.layer.cornerRadius = 10
+        button.layer.borderWidth = 1.0
+        button.addTarget(self, action: #selector(categoryButtonTapped(_:)), for: .touchUpInside)
+        return button
+    }()
+
+    @objc private func categoryButtonTapped(_ sender: UIButton) {
+        
+        for button in [dailyButton, weeklyButton, monthlyButton] {
+            button.isSelected = false
+            button.setTitleColor(UIColor.black, for: .normal)
+            button.backgroundColor = .white
+        }
+
+        sender.isSelected = true
+        sender.setTitleColor(UIColor.white, for: .normal)
+        sender.backgroundColor = .black
+    }
+ 
     private lazy var likedLabel: UILabel = {
         let label = UILabel()
         label.text = "Liked"
@@ -195,8 +251,10 @@ private extension AddRetroViewController {
             $0.height.greaterThanOrEqualTo(view.snp.height).priority(.low)
         }
 
-        [dateLabel, dateTextField, likedLabel, likedTextView, learnedLabel, learnedTextView, lackedLabel, lackedTextView, longedForLabel, longedForTextView].forEach { contentView.addSubview($0) }
+        [dateLabel, dateTextField, categoryStackView, likedLabel, likedTextView, learnedLabel, learnedTextView, lackedLabel, lackedTextView, longedForLabel, longedForTextView].forEach { contentView.addSubview($0) }
     
+        [dailyButton, weeklyButton, monthlyButton].forEach { categoryStackView.addArrangedSubview($0) }
+        
         let inset: CGFloat = 20.0
         let offset: CGFloat = 15.0
         let secondOffset: CGFloat = 10.0
@@ -214,9 +272,14 @@ private extension AddRetroViewController {
             $0.height.equalTo(25.0)
         }
         
+        categoryStackView.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview().inset(inset)
+            $0.top.equalTo(dateLabel.snp.bottom).offset(inset)
+        }
+        
         likedLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(inset)
-            $0.top.equalTo(dateLabel.snp.bottom).offset(offset)
+            $0.top.equalTo(categoryStackView.snp.bottom).offset(offset)
             $0.trailing.equalToSuperview().inset(inset)
             
         }
