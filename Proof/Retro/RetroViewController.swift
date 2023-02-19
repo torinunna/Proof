@@ -116,7 +116,6 @@ class RetroViewController: UIViewController {
             current = CalendarHelper().addDays(date: current, days: 1)
         }
         
-        titleLabel.text = CalendarHelper().yearString(date: selectedDate) + " " + CalendarHelper().monthString(date: selectedDate)
         collectionView.reloadData()
     }
     
@@ -134,6 +133,7 @@ extension RetroViewController: UICollectionViewDataSource {
         if(date == selectedDate) {
             cell.backgroundColor = UIColor.black
             cell.dayLabel.textColor = UIColor.white
+            titleLabel.text = CalendarHelper().yearString(date: selectedDate) + " " + CalendarHelper().monthString(date: selectedDate)
         } else {
             cell.backgroundColor = UIColor.white
             cell.dayLabel.textColor = UIColor.black
