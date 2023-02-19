@@ -187,7 +187,6 @@ extension RetroViewController: UITableViewDataSource {
 private extension RetroViewController {
     
     func setUpNavigationBar() {
-        navigationItem.title = "나의 회고"
         let addButton = UIBarButtonItem(image: UIImage(systemName: "plus.circle"), style: .plain, target: self, action: #selector(addBtnPressed))
         navigationItem.rightBarButtonItem = addButton
         let todayButton = UIBarButtonItem(title: "오늘", style: .plain, target: self, action: #selector(todayBtnPressed))
