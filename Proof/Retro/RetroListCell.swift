@@ -24,12 +24,6 @@ class RetroListCell: UITableViewCell {
         return label
     }()
     
-    private lazy var gradeImageView: UIImageView = {
-        let image = UIImageView()
-        image.backgroundColor = .tertiaryLabel
-        return image
-    }()
-    
     private lazy var likedLabel: UILabel = {
         let label = UILabel()
         label.text = "Liked"
@@ -72,7 +66,6 @@ class RetroListCell: UITableViewCell {
         return label
     }()
     
-    
     private lazy var longedForLabel: UILabel = {
         let label = UILabel()
         label.text = "Longed For"
@@ -86,7 +79,6 @@ class RetroListCell: UITableViewCell {
         label.font = .systemFont(ofSize: fontSize - 1.0)
         return label
     }()
-    
     
     func setUp() {
         
@@ -149,8 +141,7 @@ class RetroListCell: UITableViewCell {
             $0.trailing.equalToSuperview().inset(inset)
             $0.bottom.equalToSuperview().inset(inset)
         }
-        
-        
+    
     }
     
 }
