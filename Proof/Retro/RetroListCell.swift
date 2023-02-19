@@ -12,10 +12,15 @@ class RetroListCell: UITableViewCell {
     
     static let identifier = "RetroListCell"
     
+    let fontSize: CGFloat = 15.0
+    
     private lazy var categorylabel:  UILabel = {
         let label = UILabel()
         label.text = "Daily"
-        label.font = .systemFont(ofSize: 17.0, weight: .semibold)
+        label.font = .systemFont(ofSize: 17.0, weight: .medium)
+        label.backgroundColor = .black
+        label.textColor = .white
+        label.textAlignment = .center
         return label
     }()
     
@@ -28,42 +33,42 @@ class RetroListCell: UITableViewCell {
     private lazy var likedLabel: UILabel = {
         let label = UILabel()
         label.text = "Liked"
-        label.font = .systemFont(ofSize: 15.0, weight: .medium)
+        label.font = .systemFont(ofSize: fontSize, weight: .medium)
         return label
     }()
     
     private lazy var likedContents: UILabel = {
         let label = UILabel()
         label.text = "오늘 목표 달성"
-        label.font = .systemFont(ofSize: 15.0)
+        label.font = .systemFont(ofSize: fontSize - 1.0)
         return label
     }()
 
     private lazy var learnedLabel: UILabel = {
         let label = UILabel()
         label.text = "Learned"
-        label.font = .systemFont(ofSize: 15.0, weight: .medium)
+        label.font = .systemFont(ofSize: fontSize, weight: .medium)
         return label
     }()
     
     private lazy var learnedContents: UILabel = {
         let label = UILabel()
         label.text = "캘린더 구현"
-        label.font = .systemFont(ofSize: 15.0)
+        label.font = .systemFont(ofSize: fontSize - 1.0)
         return label
     }()
     
     private lazy var lackedLabel: UILabel = {
         let label = UILabel()
         label.text = "Lacked"
-        label.font = .systemFont(ofSize: 15.0, weight: .medium)
+        label.font = .systemFont(ofSize: fontSize, weight: .medium)
         return label
     }()
     
     private lazy var lackedContents: UILabel = {
         let label = UILabel()
         label.text = "버튼스택뷰"
-        label.font = .systemFont(ofSize: 15.0)
+        label.font = .systemFont(ofSize: fontSize - 1.0)
         return label
     }()
     
@@ -71,40 +76,34 @@ class RetroListCell: UITableViewCell {
     private lazy var longedForLabel: UILabel = {
         let label = UILabel()
         label.text = "Longed For"
-        label.font = .systemFont(ofSize: 15.0, weight: .medium)
+        label.font = .systemFont(ofSize: fontSize, weight: .medium)
         return label
     }()
     
     private lazy var longedForContents: UILabel = {
         let label = UILabel()
         label.text = "내일 목표 달성"
-        label.font = .systemFont(ofSize: 15.0)
+        label.font = .systemFont(ofSize: fontSize - 1.0)
         return label
     }()
     
     
     func setUp() {
         
-        [gradeImageView, categorylabel, likedLabel, likedContents, learnedLabel, learnedContents, lackedLabel, lackedContents, longedForLabel, longedForContents].forEach { addSubview($0) }
+        [categorylabel, likedLabel, likedContents, learnedLabel, learnedContents, lackedLabel, lackedContents, longedForLabel, longedForContents].forEach { addSubview($0) }
         
         let inset: CGFloat = 15.0
-    
-        gradeImageView.snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(inset)
-            $0.top.equalToSuperview().inset(inset)
-            $0.width.equalTo(20.0)
-            $0.height.equalTo(gradeImageView.snp.width)
-        }
-        
+            
         categorylabel.snp.makeConstraints {
-            $0.leading.equalTo(gradeImageView.snp.trailing).offset(8.0)
-            $0.top.equalTo(gradeImageView.snp.top)
-            $0.trailing.equalToSuperview().inset(inset)
+            $0.leading.equalToSuperview().inset(8.0)
+            $0.top.equalToSuperview().inset(8.0)
+            $0.height.equalTo(30.0)
+            $0.width.equalTo(80.0)
         }
         
         likedLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(inset)
-            $0.top.equalTo(gradeImageView.snp.bottom).offset(5.0)
+            $0.top.equalTo(categorylabel.snp.bottom).offset(5.0)
             $0.width.equalTo(120.0)
         }
         
