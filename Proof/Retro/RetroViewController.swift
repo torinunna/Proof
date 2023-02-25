@@ -8,10 +8,11 @@
 import SnapKit
 import UIKit
 
+var selectedDate = Date()
+
 class RetroViewController: UIViewController {
         
     let calendar = Calendar.current
-    var selectedDate = Date()
     var totalSquares = [Date]()
     
     private lazy var titleLabel: UILabel = {

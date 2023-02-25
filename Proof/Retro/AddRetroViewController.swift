@@ -22,8 +22,6 @@ class AddRetroViewController: UIViewController {
         return view
     }()
 
-    private var retroDate: Date?
-    
     let fontSize: CGFloat = 17.0
     
     private lazy var dateLabel: UILabel = {
@@ -229,7 +227,7 @@ private extension AddRetroViewController {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy년 MM월 dd일(EEEEE)"
         formatter.locale = Locale(identifier: "ko_KR")
-        retroDate = datePicker.date
+        selectedDate = datePicker.date
         dateTextField.text = formatter.string(from: datePicker.date)
     }
     //MARK:  - Layout

@@ -10,7 +10,6 @@ import UIKit
 
 class CalendarViewController: UIViewController {
     
-    var selectedDate = Date()
     var totalSquares = [String]()
     let calendar = Calendar.current
     
