@@ -31,9 +31,8 @@ class RetroListCell: UITableViewCell {
         return label
     }()
     
-    private lazy var likedContents: UILabel = {
+    lazy var likedContents: UILabel = {
         let label = UILabel()
-        label.text = "오늘 목표 달성"
         label.font = .systemFont(ofSize: fontSize - 1.0)
         return label
     }()
@@ -45,9 +44,8 @@ class RetroListCell: UITableViewCell {
         return label
     }()
     
-    private lazy var learnedContents: UILabel = {
+    lazy var learnedContents: UILabel = {
         let label = UILabel()
-        label.text = "캘린더 구현"
         label.font = .systemFont(ofSize: fontSize - 1.0)
         return label
     }()
@@ -59,9 +57,8 @@ class RetroListCell: UITableViewCell {
         return label
     }()
     
-    private lazy var lackedContents: UILabel = {
+    lazy var lackedContents: UILabel = {
         let label = UILabel()
-        label.text = "버튼스택뷰"
         label.font = .systemFont(ofSize: fontSize - 1.0)
         return label
     }()
@@ -73,9 +70,8 @@ class RetroListCell: UITableViewCell {
         return label
     }()
     
-    private lazy var longedForContents: UILabel = {
+    lazy var longedForContents: UILabel = {
         let label = UILabel()
-        label.text = "내일 목표 달성"
         label.font = .systemFont(ofSize: fontSize - 1.0)
         return label
     }()
