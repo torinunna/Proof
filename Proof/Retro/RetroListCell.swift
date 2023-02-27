@@ -91,7 +91,7 @@ class RetroListCell: UITableViewCell {
         
         likedLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(inset)
-            $0.top.equalTo(categorylabel.snp.bottom).offset(5.0)
+            $0.top.equalTo(categorylabel.snp.bottom).offset(10.0)
             $0.width.equalTo(120.0)
         }
         
@@ -129,13 +129,14 @@ class RetroListCell: UITableViewCell {
             $0.leading.equalToSuperview().inset(inset)
             $0.top.equalTo(lackedLabel.snp.bottom).offset(5.0)
             $0.width.equalTo(120.0)
+            $0.bottom.equalToSuperview().inset(10.0)
         }
         
         longedForContents.snp.makeConstraints {
             $0.leading.equalTo(lackedLabel.snp.trailing).offset(5.0)
             $0.top.equalTo(longedForLabel.snp.top)
             $0.trailing.equalToSuperview().inset(inset)
-            $0.bottom.equalToSuperview().inset(inset)
+            $0.bottom.equalToSuperview().inset(10.0)
         }
     
     }
