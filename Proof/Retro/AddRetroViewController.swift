@@ -31,11 +31,12 @@ class AddRetroViewController: UIViewController {
         return label
     }()
     
-    private lazy var dateTextField: UITextField = {
-        let textField = UITextField()
-        textField.layer.borderWidth = 1.0
-        textField.layer.cornerRadius = 10.0
-        return textField
+    lazy var datePicker: UIDatePicker = {
+        let datePicker = UIDatePicker()
+        datePicker.preferredDatePickerStyle = .wheels
+        datePicker.datePickerMode = .date
+        datePicker.locale = Locale(identifier: "ko-KR")
+        return datePicker
     }()
     
     private let categoryStackView: UIStackView = {
@@ -175,7 +176,6 @@ class AddRetroViewController: UIViewController {
         
         setUpNavigationBar()
         setUpLayout()
-        configureDate()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -214,22 +214,6 @@ private extension AddRetroViewController {
         self.present(vc, animated: true)
 }
     
-    func configureDate() {
-        let datePicker = UIDatePicker()
-        datePicker.preferredDatePickerStyle = .wheels
-        datePicker.datePickerMode = .date
-        datePicker.addTarget(self, action: #selector(datePickerValueDidChange(_:)), for: .valueChanged)
-        datePicker.locale = Locale(identifier: "ko-KR")
-        dateTextField.inputView = datePicker
-    }
-    
-    @objc func datePickerValueDidChange(_ datePicker: UIDatePicker) {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy년 MM월 dd일(EEEEE)"
-        formatter.locale = Locale(identifier: "ko_KR")
-        selectedDate = datePicker.date
-        dateTextField.text = formatter.string(from: datePicker.date)
-    }
     //MARK:  - Layout
     
     func setUpLayout() {
@@ -249,7 +233,7 @@ private extension AddRetroViewController {
             $0.height.greaterThanOrEqualTo(view.snp.height).priority(.low)
         }
 
-        [dateLabel, dateTextField, categoryStackView, likedLabel, likedTextView, learnedLabel, learnedTextView, lackedLabel, lackedTextView, longedForLabel, longedForTextView].forEach { contentView.addSubview($0) }
+        [dateLabel, datePicker, categoryStackView, likedLabel, likedTextView, learnedLabel, learnedTextView, lackedLabel, lackedTextView, longedForLabel, longedForTextView].forEach { contentView.addSubview($0) }
     
         [dailyButton, weeklyButton, monthlyButton].forEach { categoryStackView.addArrangedSubview($0) }
         
@@ -263,16 +247,16 @@ private extension AddRetroViewController {
             $0.width.equalTo(60.0)
         }
         
-        dateTextField.snp.makeConstraints {
+        datePicker.snp.makeConstraints {
             $0.leading.equalTo(dateLabel.snp.trailing)
             $0.centerY.equalTo(dateLabel.snp.centerY)
             $0.trailing.equalToSuperview().inset(30.0)
-            $0.height.equalTo(25.0)
+            $0.height.equalTo(50.0)
         }
         
         categoryStackView.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(inset)
-            $0.top.equalTo(dateLabel.snp.bottom).offset(inset)
+            $0.top.equalTo(datePicker.snp.bottom).offset(secondOffset)
         }
         
         likedLabel.snp.makeConstraints {
