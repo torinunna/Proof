@@ -54,7 +54,7 @@ class AddRetroViewController: UIViewController {
         button.backgroundColor = .white
         button.layer.cornerRadius = 10
         button.layer.borderWidth = 1.0
-        button.addTarget(self, action: #selector(categoryButtonTapped(_:)), for: .touchUpInside)
+        button.addTarget(self, action: #selector(categoryBtnPressed(_:)), for: .touchUpInside)
         return button
     }()
 
@@ -66,7 +66,7 @@ class AddRetroViewController: UIViewController {
         button.backgroundColor = .white
         button.layer.cornerRadius = 10
         button.layer.borderWidth = 1.0
-        button.addTarget(self, action: #selector(categoryButtonTapped(_:)), for: .touchUpInside)
+        button.addTarget(self, action: #selector(categoryBtnPressed(_:)), for: .touchUpInside)
         return button
     }()
     
@@ -78,11 +78,11 @@ class AddRetroViewController: UIViewController {
         button.backgroundColor = .white
         button.layer.cornerRadius = 10
         button.layer.borderWidth = 1.0
-        button.addTarget(self, action: #selector(categoryButtonTapped(_:)), for: .touchUpInside)
+        button.addTarget(self, action: #selector(categoryBtnPressed(_:)), for: .touchUpInside)
         return button
     }()
 
-    @objc private func categoryButtonTapped(_ sender: UIButton) {
+    @objc private func categoryBtnPressed(_ sender: UIButton) {
         
         for button in [dailyButton, weeklyButton, monthlyButton] {
             button.isSelected = false
