@@ -21,6 +21,7 @@
 		86369C74292B29740089D70D /* PopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86369C73292B29740089D70D /* PopUpViewController.swift */; };
 		867ACE31292129BC00F71476 /* RetroListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 867ACE30292129BC00F71476 /* RetroListCell.swift */; };
 		867ACE332921355A00F71476 /* AddRetroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 867ACE322921355A00F71476 /* AddRetroViewController.swift */; };
+		86B15B0329AFA21700B7A93B /* Retro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B15B0229AFA21700B7A93B /* Retro.swift */; };
 		86F54AA6292BB42A00856261 /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F54AA5292BB42A00856261 /* UIButton+.swift */; };
 /* End PBXBuildFile section */
 
@@ -40,6 +41,7 @@
 		86369C73292B29740089D70D /* PopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpViewController.swift; sourceTree = "<group>"; };
 		867ACE30292129BC00F71476 /* RetroListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetroListCell.swift; sourceTree = "<group>"; };
 		867ACE322921355A00F71476 /* AddRetroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRetroViewController.swift; sourceTree = "<group>"; };
+		86B15B0229AFA21700B7A93B /* Retro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Retro.swift; sourceTree = "<group>"; };
 		86F54AA5292BB42A00856261 /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -94,6 +96,7 @@
 				86123C592918F2010004748F /* RetroViewController.swift */,
 				867ACE30292129BC00F71476 /* RetroListCell.swift */,
 				867ACE322921355A00F71476 /* AddRetroViewController.swift */,
+				86B15B0229AFA21700B7A93B /* Retro.swift */,
 				86369C73292B29740089D70D /* PopUpViewController.swift */,
 			);
 			path = Retro;
@@ -204,6 +207,7 @@
 				86123C5A2918F2010004748F /* RetroViewController.swift in Sources */,
 				860BA95129978DCA00444810 /* CalendarViewController.swift in Sources */,
 				86123C412918E44F0004748F /* SceneDelegate.swift in Sources */,
+				86B15B0329AFA21700B7A93B /* Retro.swift in Sources */,
 				86123C562918F1AC0004748F /* SettingViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

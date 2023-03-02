@@ -86,6 +86,11 @@ class RetroViewController: UIViewController {
         setWeekView()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        tableView.reloadData()
+    }
+    
     func setUpStackView() {
         let weekdays = ["일", "월", "화", "수", "목", "금", "토"]
         
@@ -118,6 +123,7 @@ class RetroViewController: UIViewController {
         }
         
         collectionView.reloadData()
+        tableView.reloadData()
     }
     
 }
@@ -151,6 +157,7 @@ extension RetroViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedDate = totalSquares[indexPath.item]
         collectionView.reloadData()
+        tableView.reloadData()
     }
 }
 
@@ -169,16 +176,22 @@ extension RetroViewController: UICollectionViewDelegateFlowLayout {
 //MARK:  - TableView Extension
 
 extension RetroViewController: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return Retro().retrosForDate(date: selectedDate).count
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: RetroListCell.identifier, for: indexPath) as? RetroListCell else { return UITableViewCell() }
         cell.selectionStyle = .none
         cell.setUp()
-        
+        let retro = Retro().retrosForDate(date: selectedDate)[indexPath.row]
+        cell.categorylabel.text = retro.category
+        cell.likedContents.text = retro.liked
+        cell.lackedContents.text = retro.lacked
+        cell.learnedContents.text = retro.learned
+        cell.longedForContents.text = retro.longedFor
         return cell
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
     }
     
 }

@@ -14,7 +14,7 @@ class RetroListCell: UITableViewCell {
     
     let fontSize: CGFloat = 15.0
     
-    private lazy var categorylabel:  UILabel = {
+    lazy var categorylabel:  UILabel = {
         let label = UILabel()
         label.text = "Daily"
         label.font = .systemFont(ofSize: 17.0, weight: .medium)

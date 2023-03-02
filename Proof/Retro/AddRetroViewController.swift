@@ -10,10 +10,12 @@ import UIKit
 
 class AddRetroViewController: UIViewController {
     
+    var categoryString: String?
+    
     private lazy var scrollView: UIScrollView = {
         let view = UIScrollView()
         view.backgroundColor = .systemBackground
-       return view
+        return view
     }()
     
     private lazy var contentView: UIView = {
@@ -93,8 +95,19 @@ class AddRetroViewController: UIViewController {
         sender.isSelected = true
         sender.setTitleColor(UIColor.white, for: .normal)
         sender.backgroundColor = .black
+        
+        switch sender {
+        case dailyButton:
+            categoryString = "Daily"
+        case weeklyButton:
+            categoryString = "Weekly"
+        case monthlyButton:
+            categoryString = "Monthly"
+        default:
+            categoryString = nil
+        }
     }
- 
+    
     private lazy var likedLabel: UILabel = {
         let label = UILabel()
         label.text = "Liked"
@@ -176,6 +189,7 @@ class AddRetroViewController: UIViewController {
         
         setUpNavigationBar()
         setUpLayout()
+        datePicker.date = selectedDate
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -209,10 +223,18 @@ private extension AddRetroViewController {
     }
     
     @objc func saveBtnPressed() {
-        let vc = PopUpViewController()
-        vc.modalPresentationStyle = .fullScreen
-        self.present(vc, animated: true)
-}
+        let newRetro = Retro()
+        newRetro.id = retrosList.count
+        newRetro.date = datePicker.date
+        newRetro.category = categoryString
+        newRetro.liked = likedTextView.text
+        newRetro.lacked = lackedTextView.text
+        newRetro.learned = learnedTextView.text
+        newRetro.longedFor = longedForTextView.text
+        
+        retrosList.append(newRetro)
+        dismiss(animated: true)
+    }
     
     //MARK:  - Layout
     
