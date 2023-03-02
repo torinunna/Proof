@@ -86,7 +86,7 @@ class RetroListCell: UITableViewCell {
             $0.leading.equalToSuperview().inset(8.0)
             $0.top.equalToSuperview().inset(8.0)
             $0.height.equalTo(30.0)
-            $0.width.equalTo(80.0)
+            $0.width.equalTo(100.0)
         }
         
         likedLabel.snp.makeConstraints {
