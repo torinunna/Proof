@@ -132,7 +132,7 @@ extension CalendarViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CalendarCell.identifier, for: indexPath) as? CalendarCell else { return UICollectionViewCell() }
-        cell.setUp()
+        cell.monthlySetUp()
         cell.dayLabel.text = totalSquares[indexPath.item]
         return cell
     }
@@ -143,7 +143,7 @@ extension CalendarViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width: CGFloat = (collectionView.frame.size.width - 2) / 7
-        let height: CGFloat = (collectionView.frame.size.height - 2) / 8
+        let height: CGFloat = (collectionView.frame.size.height - 2) / 6
 
         return CGSize(width: width, height: height)
     }
@@ -179,7 +179,7 @@ private extension CalendarViewController {
     func setUpLayout() {
         [yearLabel, monthLabel, previousMonthButton, nextMonthButton, weekdayStackView, collectionView].forEach { view.addSubview($0) }
         
-        let inset: CGFloat = 15.0
+        let inset: CGFloat = 6.0
         let buttonWidth: CGFloat = 25.0
         
         yearLabel.snp.makeConstraints {
@@ -189,7 +189,7 @@ private extension CalendarViewController {
         
         monthLabel.snp.makeConstraints {
             $0.centerX.equalTo(view.safeAreaLayoutGuide)
-            $0.top.equalTo(yearLabel.snp.bottom).offset(6.0)
+            $0.top.equalTo(yearLabel.snp.bottom).offset(inset)
         }
         
         previousMonthButton.snp.makeConstraints {
@@ -215,9 +215,9 @@ private extension CalendarViewController {
         
         collectionView.snp.makeConstraints {
             $0.leading.equalTo(view.safeAreaLayoutGuide).inset(inset)
-            $0.top.equalTo(weekdayStackView.snp.bottom)
+            $0.top.equalTo(weekdayStackView.snp.bottom).offset(inset)
             $0.trailing.equalTo(view.safeAreaLayoutGuide).inset(inset)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(inset)
+            $0.height.equalTo(weekdayStackView.snp.height).multipliedBy(7)
         }
         
     }

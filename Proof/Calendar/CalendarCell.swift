@@ -20,10 +20,18 @@ class CalendarCell: UICollectionViewCell {
         return label
     }()
     
-    func setUp() {
+    func weeklySetUp() {
         addSubview(dayLabel)
         dayLabel.snp.makeConstraints {
             $0.center.equalToSuperview()
+        }
+    }
+    
+    func monthlySetUp() {
+        addSubview(dayLabel)
+        dayLabel.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.top.equalToSuperview()
         }
     }
 }

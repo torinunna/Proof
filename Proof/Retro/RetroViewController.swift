@@ -146,7 +146,7 @@ extension RetroViewController: UICollectionViewDataSource {
             cell.dayLabel.textColor = UIColor.black
         }
 
-        cell.setUp()
+        cell.weeklySetUp()
         return cell
     }
 
