@@ -122,7 +122,7 @@ class CalendarViewController: UIViewController {
 
 }
 
-//MARK:  - CollectionView DataSource
+//MARK:  - CollectionView Extension
 
 extension CalendarViewController: UICollectionViewDataSource {
     
@@ -138,8 +138,6 @@ extension CalendarViewController: UICollectionViewDataSource {
     }
     
 }
-
-//MARK:  - CollectionView Delegate
 
 extension CalendarViewController: UICollectionViewDelegateFlowLayout {
     
