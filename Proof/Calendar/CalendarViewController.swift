@@ -70,6 +70,22 @@ class CalendarViewController: UIViewController {
         return collectionView
     }()
     
+    private lazy var tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.backgroundColor = .systemBackground
+        tableView.separatorStyle = .singleLine
+        tableView.separatorInset = UIEdgeInsets(top: 0, left: 15.0, bottom: 0, right: 15.0)
+        tableView.layer.borderWidth = 1.5
+        tableView.layer.borderColor = UIColor.systemGray.cgColor
+        tableView.layer.cornerRadius = 10.0
+        
+        tableView.dataSource = self
+        
+        tableView.register(CalendarTableViewCell.self, forCellReuseIdentifier: CalendarTableViewCell.identifier)
+        
+        return tableView
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpNavigationBar()
@@ -150,6 +166,23 @@ extension CalendarViewController: UICollectionViewDelegateFlowLayout {
     
 }
 
+//MARK:  - TableView Extension
+
+extension CalendarViewController: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 3
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: CalendarTableViewCell.identifier, for: indexPath) as? CalendarTableViewCell else { return UITableViewCell() }
+        cell.setUp()
+        cell.selectionStyle = .none
+        return cell
+    }
+    
+}
+
 //MARK:  - NavigationBar
 
 private extension CalendarViewController {
@@ -177,7 +210,7 @@ private extension CalendarViewController {
 //MARK:  - Layout
     
     func setUpLayout() {
-        [yearLabel, monthLabel, previousMonthButton, nextMonthButton, weekdayStackView, collectionView].forEach { view.addSubview($0) }
+        [yearLabel, monthLabel, previousMonthButton, nextMonthButton, weekdayStackView, collectionView, tableView].forEach { view.addSubview($0) }
         
         let inset: CGFloat = 6.0
         let buttonWidth: CGFloat = 25.0
@@ -218,6 +251,12 @@ private extension CalendarViewController {
             $0.top.equalTo(weekdayStackView.snp.bottom).offset(inset)
             $0.trailing.equalTo(view.safeAreaLayoutGuide).inset(inset)
             $0.height.equalTo(weekdayStackView.snp.height).multipliedBy(7)
+        }
+        
+        tableView.snp.makeConstraints {
+            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(15.0)
+            $0.top.equalTo(collectionView.snp.bottom).offset(inset)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(10.0)
         }
         
     }
