@@ -154,11 +154,6 @@ extension RetroViewController: UICollectionViewDataSource {
         totalSquares.count
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        selectedDate = totalSquares[indexPath.item]
-        collectionView.reloadData()
-        tableView.reloadData()
-    }
 }
 
 extension RetroViewController: UICollectionViewDelegateFlowLayout {
@@ -170,6 +165,12 @@ extension RetroViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return .zero
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        selectedDate = totalSquares[indexPath.item]
+        collectionView.reloadData()
+        tableView.reloadData()
     }
     
 }
