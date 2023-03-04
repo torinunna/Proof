@@ -186,7 +186,7 @@ extension RetroViewController: UITableViewDataSource {
         cell.selectionStyle = .none
         cell.setUp()
         let retro = Retro().retrosForDate(date: selectedDate)[indexPath.row]
-        cell.categorylabel.text = retro.category
+        cell.categoryLabel.text = retro.category
         cell.likedContents.text = retro.liked
         cell.lackedContents.text = retro.lacked
         cell.learnedContents.text = retro.learned

@@ -14,7 +14,7 @@ class RetroListCell: UITableViewCell {
     
     let fontSize: CGFloat = 15.0
     
-    lazy var categorylabel:  UILabel = {
+    lazy var categoryLabel:  UILabel = {
         let label = UILabel()
         label.text = "Daily"
         label.font = .systemFont(ofSize: 17.0, weight: .medium)
@@ -78,11 +78,11 @@ class RetroListCell: UITableViewCell {
     
     func setUp() {
         
-        [categorylabel, likedLabel, likedContents, learnedLabel, learnedContents, lackedLabel, lackedContents, longedForLabel, longedForContents].forEach { addSubview($0) }
+        [categoryLabel, likedLabel, likedContents, learnedLabel, learnedContents, lackedLabel, lackedContents, longedForLabel, longedForContents].forEach { addSubview($0) }
         
         let inset: CGFloat = 15.0
             
-        categorylabel.snp.makeConstraints {
+        categoryLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(8.0)
             $0.top.equalToSuperview().inset(8.0)
             $0.height.equalTo(30.0)
@@ -91,7 +91,7 @@ class RetroListCell: UITableViewCell {
         
         likedLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(inset)
-            $0.top.equalTo(categorylabel.snp.bottom).offset(10.0)
+            $0.top.equalTo(categoryLabel.snp.bottom).offset(10.0)
             $0.width.equalTo(120.0)
         }
         
