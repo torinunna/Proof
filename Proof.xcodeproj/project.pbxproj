@@ -20,7 +20,7 @@
 		86123C562918F1AC0004748F /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86123C552918F1AC0004748F /* SettingViewController.swift */; };
 		86123C5A2918F2010004748F /* RetroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86123C592918F2010004748F /* RetroViewController.swift */; };
 		86369C74292B29740089D70D /* PopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86369C73292B29740089D70D /* PopUpViewController.swift */; };
-		867ACE31292129BC00F71476 /* RetroListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 867ACE30292129BC00F71476 /* RetroListCell.swift */; };
+		867ACE31292129BC00F71476 /* RetroTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 867ACE30292129BC00F71476 /* RetroTableViewCell.swift */; };
 		867ACE332921355A00F71476 /* AddRetroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 867ACE322921355A00F71476 /* AddRetroViewController.swift */; };
 		86B15B0329AFA21700B7A93B /* Retro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B15B0229AFA21700B7A93B /* Retro.swift */; };
 		86F54AA6292BB42A00856261 /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F54AA5292BB42A00856261 /* UIButton+.swift */; };
@@ -41,7 +41,7 @@
 		86123C552918F1AC0004748F /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		86123C592918F2010004748F /* RetroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetroViewController.swift; sourceTree = "<group>"; };
 		86369C73292B29740089D70D /* PopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpViewController.swift; sourceTree = "<group>"; };
-		867ACE30292129BC00F71476 /* RetroListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetroListCell.swift; sourceTree = "<group>"; };
+		867ACE30292129BC00F71476 /* RetroTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetroTableViewCell.swift; sourceTree = "<group>"; };
 		867ACE322921355A00F71476 /* AddRetroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRetroViewController.swift; sourceTree = "<group>"; };
 		86B15B0229AFA21700B7A93B /* Retro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Retro.swift; sourceTree = "<group>"; };
 		86F54AA5292BB42A00856261 /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
@@ -96,7 +96,7 @@
 			isa = PBXGroup;
 			children = (
 				86123C592918F2010004748F /* RetroViewController.swift */,
-				867ACE30292129BC00F71476 /* RetroListCell.swift */,
+				867ACE30292129BC00F71476 /* RetroTableViewCell.swift */,
 				867ACE322921355A00F71476 /* AddRetroViewController.swift */,
 				86B15B0229AFA21700B7A93B /* Retro.swift */,
 				86369C73292B29740089D70D /* PopUpViewController.swift */,
@@ -203,7 +203,7 @@
 				860A66C52923EEFB00A2D926 /* CalendarHelper.swift in Sources */,
 				867ACE332921355A00F71476 /* AddRetroViewController.swift in Sources */,
 				860185F729B1C274007F979A /* CalendarTableViewCell.swift in Sources */,
-				867ACE31292129BC00F71476 /* RetroListCell.swift in Sources */,
+				867ACE31292129BC00F71476 /* RetroTableViewCell.swift in Sources */,
 				86123C432918E44F0004748F /* TabBarController.swift in Sources */,
 				86369C74292B29740089D70D /* PopUpViewController.swift in Sources */,
 				860A66C32923E80C00A2D926 /* CalendarCollectionViewCell.swift in Sources */,

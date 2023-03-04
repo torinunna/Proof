@@ -1,5 +1,5 @@
 //
-//  RetroListCell.swift
+//  RetroTableViewCell.swift
 //  Proof
 //
 //  Created by YUJIN KWON on 2022/11/13.
@@ -8,9 +8,9 @@
 import SnapKit
 import UIKit
 
-class RetroListCell: UITableViewCell {
+class RetroTableViewCell: UITableViewCell {
     
-    static let identifier = "RetroListCell"
+    static let identifier = "RetroTableViewCell"
     
     let fontSize: CGFloat = 15.0
     

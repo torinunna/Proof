@@ -73,7 +73,7 @@ class RetroViewController: UIViewController {
         tableView.separatorStyle = .none
         tableView.dataSource = self
         
-        tableView.register(RetroListCell.self, forCellReuseIdentifier: RetroListCell.identifier)
+        tableView.register(RetroTableViewCell.self, forCellReuseIdentifier: RetroTableViewCell.identifier)
         
         return tableView
     }()
@@ -182,7 +182,7 @@ extension RetroViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: RetroListCell.identifier, for: indexPath) as? RetroListCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: RetroTableViewCell.identifier, for: indexPath) as? RetroTableViewCell else { return UITableViewCell() }
         cell.selectionStyle = .none
         cell.setUp()
         let retro = Retro().retrosForDate(date: selectedDate)[indexPath.row]
