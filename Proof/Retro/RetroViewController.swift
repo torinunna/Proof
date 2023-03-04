@@ -60,7 +60,7 @@ class RetroViewController: UIViewController {
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.isScrollEnabled = false
-        collectionView.register(CalendarCell.self, forCellWithReuseIdentifier: CalendarCell.identifier)
+        collectionView.register(CalendarCollectionViewCell.self, forCellWithReuseIdentifier: CalendarCollectionViewCell.identifier)
         collectionView.delegate = self
         collectionView.dataSource = self
         
@@ -132,7 +132,7 @@ class RetroViewController: UIViewController {
 
 extension RetroViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CalendarCell.identifier, for: indexPath) as? CalendarCell else { return UICollectionViewCell() }
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CalendarCollectionViewCell.identifier, for: indexPath) as? CalendarCollectionViewCell else { return UICollectionViewCell() }
         
         let date = totalSquares[indexPath.item]
         cell.dayLabel.text = String(CalendarHelper().dayOfMonth(date: date))

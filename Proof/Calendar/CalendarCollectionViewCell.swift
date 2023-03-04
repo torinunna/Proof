@@ -1,5 +1,5 @@
 //
-//  CalendarCell.swift
+//  CalendarCollectionViewCell.swift
 //  Proof
 //
 //  Created by YUJIN KWON on 2022/11/16.
@@ -8,9 +8,9 @@
 import SnapKit
 import UIKit
 
-class CalendarCell: UICollectionViewCell {
+class CalendarCollectionViewCell: UICollectionViewCell {
     
-    static let identifier = "CalendarCell"
+    static let identifier = "CalendarCollectionViewCell"
     
     var dayLabel: UILabel = {
         let label = UILabel()
