@@ -137,7 +137,7 @@ extension RetroViewController: UICollectionViewDataSource {
         let date = totalSquares[indexPath.item]
         cell.dayLabel.text = String(CalendarHelper().dayOfMonth(date: date))
         
-        if(date == selectedDate) {
+        if date == selectedDate {
             cell.backgroundColor = UIColor.black
             cell.dayLabel.textColor = UIColor.white
             titleLabel.text = CalendarHelper().yearString(date: selectedDate) + " " + CalendarHelper().monthString(date: selectedDate)
@@ -147,6 +147,7 @@ extension RetroViewController: UICollectionViewDataSource {
         }
 
         cell.weeklySetUp()
+        
         return cell
     }
 
