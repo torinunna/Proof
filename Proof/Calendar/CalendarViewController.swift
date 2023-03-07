@@ -12,6 +12,7 @@ class CalendarViewController: UIViewController {
     
     var totalSquares = [String]()
     let calendar = Calendar.current
+    var selectedDateString: String?
     
     private lazy var yearLabel: UILabel = {
         let label = UILabel()
@@ -133,6 +134,7 @@ class CalendarViewController: UIViewController {
  
         yearLabel.text = CalendarHelper().yearString(date: selectedDate)
         monthLabel.text = CalendarHelper().monthString(date: selectedDate)
+        
         collectionView.reloadData()
     }
 
@@ -148,8 +150,20 @@ extension CalendarViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CalendarCollectionViewCell.identifier, for: indexPath) as? CalendarCollectionViewCell else { return UICollectionViewCell() }
+        
+        let date = totalSquares[indexPath.item]
+        cell.dayLabel.text = date
+        
+        if date == selectedDateString {
+            cell.backgroundColor = UIColor.black
+            cell.dayLabel.textColor = UIColor.white
+        } else {
+            cell.backgroundColor = UIColor.white
+            cell.dayLabel.textColor = UIColor.black
+        }
+
         cell.monthlySetUp()
-        cell.dayLabel.text = totalSquares[indexPath.item]
+        
         return cell
     }
     
@@ -162,6 +176,11 @@ extension CalendarViewController: UICollectionViewDelegateFlowLayout {
         let height: CGFloat = (collectionView.frame.size.height - 2) / 6
 
         return CGSize(width: width, height: height)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        selectedDateString = totalSquares[indexPath.item]
+        collectionView.reloadData()
     }
     
 }
