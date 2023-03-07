@@ -31,7 +31,7 @@ class CalendarCollectionViewCell: UICollectionViewCell {
         addSubview(dayLabel)
         dayLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalToSuperview()
+            $0.top.equalToSuperview().inset(8.0)
         }
     }
 }

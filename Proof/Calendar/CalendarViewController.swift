@@ -60,7 +60,7 @@ class CalendarViewController: UIViewController {
     
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.minimumLineSpacing = .zero
+        layout.minimumLineSpacing = 0.5
         layout.minimumInteritemSpacing = .zero
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -267,7 +267,7 @@ private extension CalendarViewController {
         
         collectionView.snp.makeConstraints {
             $0.leading.equalTo(view.safeAreaLayoutGuide).inset(inset)
-            $0.top.equalTo(weekdayStackView.snp.bottom).offset(inset)
+            $0.top.equalTo(weekdayStackView.snp.bottom)
             $0.trailing.equalTo(view.safeAreaLayoutGuide).inset(inset)
             $0.height.equalTo(weekdayStackView.snp.height).multipliedBy(7)
         }
@@ -275,7 +275,7 @@ private extension CalendarViewController {
         tableView.snp.makeConstraints {
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(15.0)
             $0.top.equalTo(collectionView.snp.bottom).offset(inset)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(10.0)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(inset)
         }
         
     }
