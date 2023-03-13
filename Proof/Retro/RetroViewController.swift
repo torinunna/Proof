@@ -117,7 +117,7 @@ class RetroViewController: UIViewController {
         var current = CalendarHelper().sundayForDate(date: selectedDate)
         let nextsunday = CalendarHelper().addDays(date: current, days: 7)
         
-        while (current < nextsunday) {
+        while current < nextsunday {
             totalSquares.append(current)
             current = CalendarHelper().addDays(date: current, days: 1)
         }
