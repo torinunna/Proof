@@ -117,9 +117,9 @@ class CalendarViewController: UIViewController {
     func setMonthView() {
         totalSquares.removeAll()
         
-        let daysInMonth = CalendarHelper().daysInMonth(date: selectedDate)
-        let firstDayOfMonth = CalendarHelper().firstOfMonth(date: selectedDate)
-        let startingSpaces = CalendarHelper().weekDay(date: firstDayOfMonth)
+        let daysInMonth = helper.daysInMonth(date: selectedDate)
+        let firstDayOfMonth = helper.firstOfMonth(date: selectedDate)
+        let startingSpaces = helper.weekDay(date: firstDayOfMonth)
         
         var count: Int = 1
         
@@ -132,8 +132,8 @@ class CalendarViewController: UIViewController {
             count += 1
         }
  
-        yearLabel.text = CalendarHelper().yearString(date: selectedDate)
-        monthLabel.text = CalendarHelper().monthString(date: selectedDate)
+        yearLabel.text = helper.yearString(date: selectedDate)
+        monthLabel.text = helper.monthString(date: selectedDate)
         
         collectionView.reloadData()
     }

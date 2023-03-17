@@ -9,6 +9,7 @@ import SnapKit
 import UIKit
 
 var selectedDate = Date()
+var helper = CalendarHelper()
 
 class RetroViewController: UIViewController {
         
@@ -114,12 +115,12 @@ class RetroViewController: UIViewController {
     func setWeekView() {
         totalSquares.removeAll()
         
-        var current = CalendarHelper().sundayForDate(date: selectedDate)
-        let nextsunday = CalendarHelper().addDays(date: current, days: 7)
+        var current = helper.sundayForDate(date: selectedDate)
+        let nextsunday = helper.addDays(date: current, days: 7)
         
         while current < nextsunday {
             totalSquares.append(current)
-            current = CalendarHelper().addDays(date: current, days: 1)
+            current = helper.addDays(date: current, days: 1)
         }
         
         collectionView.reloadData()
@@ -140,12 +141,12 @@ extension RetroViewController: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CalendarCollectionViewCell.identifier, for: indexPath) as? CalendarCollectionViewCell else { return UICollectionViewCell() }
         
         let date = totalSquares[indexPath.item]
-        cell.dayLabel.text = String(CalendarHelper().dayOfMonth(date: date))
+        cell.dayLabel.text = String(helper.dayOfMonth(date: date))
         
         if date == selectedDate {
             cell.backgroundColor = UIColor.black
             cell.dayLabel.textColor = UIColor.white
-            titleLabel.text = CalendarHelper().yearString(date: selectedDate) + " " + CalendarHelper().monthString(date: selectedDate)
+            titleLabel.text = helper.yearString(date: selectedDate) + " " + helper.monthString(date: selectedDate)
         } else {
             cell.backgroundColor = UIColor.white
             cell.dayLabel.textColor = UIColor.black
