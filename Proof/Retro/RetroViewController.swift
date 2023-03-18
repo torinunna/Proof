@@ -71,7 +71,9 @@ class RetroViewController: UIViewController {
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero)
         tableView.backgroundColor = .systemBackground
-        tableView.separatorStyle = .none
+        tableView.separatorStyle = .singleLine
+        tableView.separatorInset = UIEdgeInsets(top: 0, left: 8.0, bottom: 0, right: 8.0)
+        tableView.layer.borderColor = UIColor.systemGray.cgColor
         tableView.dataSource = self
         
         tableView.register(RetroTableViewCell.self, forCellReuseIdentifier: RetroTableViewCell.identifier)
