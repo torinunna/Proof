@@ -35,7 +35,7 @@ class CalendarViewController: UIViewController {
     }()
     
     @objc func previousMonthBtnPressed() {
-        selectedDate = calendar.date(byAdding: DateComponents(month: -1), to: selectedDate) ?? Date()
+        selectedDate = helper.minusMonth(date: selectedDate)
         setMonthView()
     }
     
@@ -48,7 +48,7 @@ class CalendarViewController: UIViewController {
     }()
     
     @objc func nextMonthBtnPressed() {
-        selectedDate = calendar.date(byAdding: DateComponents(month: 1), to: selectedDate) ?? Date()
+        selectedDate = helper.plusMonth(date: selectedDate)
         setMonthView()
     }
     
