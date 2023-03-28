@@ -10,7 +10,7 @@ import UIKit
 
 class CalendarViewController: UIViewController {
     
-    var totalSquares = [String]()
+    var totalSquares = [CalendarDay]()
     let calendar = Calendar.current
     var selectedDateString: String?
     
@@ -121,17 +121,30 @@ class CalendarViewController: UIViewController {
         let firstDayOfMonth = helper.firstOfMonth(date: selectedDate)
         let startingSpaces = helper.weekDay(date: firstDayOfMonth)
         
+        let prevMonth = helper.minusMonth(date: selectedDate)
+        let daysInPrevMonth = helper.daysInMonth(date: prevMonth)
+        
         var count: Int = 1
         
         while count <= 42 {
-            if count <= startingSpaces || count - startingSpaces > daysInMonth {
-                totalSquares.append("")
+            let calendarDay = CalendarDay()
+            
+            if count <= startingSpaces {
+                let prevMonthDay = daysInPrevMonth - startingSpaces + count
+                calendarDay.day = String(prevMonthDay)
+                calendarDay.month = CalendarDay.Month.previous
+            } else if count - startingSpaces > daysInMonth {
+                calendarDay.day = String(count - daysInMonth - startingSpaces)
+                calendarDay.month = CalendarDay.Month.next
             } else {
-                totalSquares.append(String(count - startingSpaces))
+                calendarDay.day = String(count - startingSpaces)
+                calendarDay.month = CalendarDay.Month.current
             }
+            
+            totalSquares.append(calendarDay)
             count += 1
         }
- 
+        
         yearLabel.text = helper.yearString(date: selectedDate)
         monthLabel.text = helper.monthString(date: selectedDate)
         
@@ -151,15 +164,14 @@ extension CalendarViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CalendarCollectionViewCell.identifier, for: indexPath) as? CalendarCollectionViewCell else { return UICollectionViewCell() }
         
-        let date = totalSquares[indexPath.item]
-        cell.dayLabel.text = date
+        let calendarDay = totalSquares[indexPath.item]
+        cell.dayLabel.text = calendarDay.day
         
-        if date == selectedDateString {
-            cell.backgroundColor = UIColor.black
-            cell.dayLabel.textColor = UIColor.white
-        } else {
-            cell.backgroundColor = UIColor.white
+        if calendarDay.month == CalendarDay.Month.current {
             cell.dayLabel.textColor = UIColor.black
+            cell.dayLabel.font = .systemFont(ofSize: 16.0, weight: .medium)
+        } else {
+            cell.dayLabel.textColor = UIColor.gray
         }
 
         cell.monthlySetUp()
@@ -176,11 +188,6 @@ extension CalendarViewController: UICollectionViewDelegateFlowLayout {
         let height: CGFloat = (collectionView.frame.size.height - 2) / 6
 
         return CGSize(width: width, height: height)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        selectedDateString = totalSquares[indexPath.item]
-        collectionView.reloadData()
     }
     
 }

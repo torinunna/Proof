@@ -21,6 +21,14 @@ class CalendarHelper {
         dateFormatter.dateFormat = "yyyy년"
         return dateFormatter.string(from: date)
     }
+    
+    func minusMonth(date: Date) -> Date {
+            return calendar.date(byAdding: .month, value: -1, to: date)!
+    }
+    
+    func plusMonth(date: Date) -> Date {
+            return calendar.date(byAdding: .month, value: 1, to: date)!
+    }
 
 //MARK:  - Monthly
     
